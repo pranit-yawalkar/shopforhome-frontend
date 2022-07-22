@@ -1,0 +1,83 @@
+.main-container {
+    margin: 0.5em auto;
+    background-color: #fff;
+    border-radius: 0.5em;
+}
+
+.product-details .add-to-cart .add-to-cart-btn {
+    position: relative;
+    border: 2px solid transparent;
+    height: 40px;
+    padding: 0 30px;
+    background-color: #ef233c;
+    color: #FFF;
+    text-transform: uppercase;
+    font-weight: 700;
+    border-radius: 40px;
+    -webkit-transition: 0.2s all;
+    transition: 0.2s all;
+}
+
+.product-details .add-to-cart .add-to-cart-btn>i {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    line-height: 38px;
+    color: #D10024;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.product-details .add-to-cart .add-to-cart-btn:hover {
+    background-color: #FFF;
+    color: #D10024;
+    border-color: #D10024;
+    padding: 0px 30px 0px 50px;
+}
+
+.product-details .add-to-cart .add-to-cart-btn:hover>i {
+    opacity: 1;
+    visibility: visible;
+}
+
+.img-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    cursor: pointer;
+}
+
+.img-container img {
+    margin: auto;
+}
+
+.card {
+    cursor: default;
+}
+
+.card-img-top {
+    margin: auto;
+}
+
+.card-header {
+    cursor: pointer;
+}
+
+.card-body {
+    cursor: pointer;
+}
+
+
+@media screen and (max-width: 1200px) and (min-width: 600px) {
+    .btn-container {
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+    }
+
+    .btn-container button {
+        margin-top: 0.5em;
+    }
+}

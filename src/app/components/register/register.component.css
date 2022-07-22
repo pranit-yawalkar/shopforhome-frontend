@@ -1,0 +1,31 @@
+.main-container {
+    margin: auto;
+    background-color: #fff;
+    width: 60%;
+    border-radius: 0.5em;
+}
+
+.form-container {
+    width: 90%;
+    margin: auto;
+    padding: 1em;
+}
+
+.btn-square {
+    border-radius: 0;
+    margin: auto;
+}
+
+.btn-color {
+    background-color: var(--secondary);
+}
+
+.input-danger {
+    outline: red;
+}
+
+@media screen and (max-width: 1080px) {
+    .main-container {
+        width: 90%;
+    }
+}

@@ -1,0 +1,38 @@
+.container {
+    margin: 0.5em auto;
+    background-color: #fff;
+    border-radius: 0.5em;
+}
+
+.profile-container div {
+    margin: auto;
+    width: 60%;
+}
+
+.list-group {
+    width: 100%;
+    margin: auto;
+}
+
+.list-group li:first-child {
+    width: 25%;
+    font-weight: bold;
+}
+
+.list-group li {
+    width: 75%;
+}
+
+@media screen and (max-width: 1080px) {
+    .profile-container div {
+        margin: auto;
+        width: 90%;
+    }
+
+    .profile-container div ul li {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+}
+

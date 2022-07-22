@@ -1,0 +1,45 @@
+<div class="section">
+    <div class="container">
+        <h3 *ngIf="category!=null" class="py-3 mx-3">{{category.categoryName}}</h3>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                        <div class="col-md-4 col-sm-6" *ngFor="let product of products">
+                            <div class="card my-2" *ngIf="product!=null && category!=null && category.id==product.categoryId">
+                                <div class="img-container" (click)="selectProduct(product.productId)">
+                                    <img (click)="selectProduct(product.productId)" [src]="product.imageUrl"
+                                        alt="{{product.productName}}" class="card-img-top my-2 mx-auto">
+                                </div>
+                                <div (click)="selectProduct(product.productId)" class="card-header">
+                                    <div class="card-title">
+                                        <p>{{product.productName | titlecase }}</p>
+                                    </div>
+                                </div>
+                                <div (click)="selectProduct(product.productId)" class="card-body">
+                                    <h6>{{ product.description.substr(0, 25) }}</h6>
+                                    <p class="lead">{{ product.price | currency: "INR" }}</p>
+                                </div>
+                                <div class="m-auto mb-4 btn-container">
+                                    <button (click)="addProductToCart(product.productId)" class="mx-2 btn btn-outline-primary btn-block"
+                                        [class.disabled]="product.quantity < 1"
+                                        [class.btn-outline-danger]="product.quantity < 1">
+                                        <i
+                                            [ngClass]="(product.quantity < 1) ? 'bi bi-cart-x-fill': 'bi bi-cart-fill'"></i>&nbsp;
+                                        {{ product.quantity < 1 ? "Out of stock" : "Add to Cart" }} <!-- <i
+                                            [class.]="product.quantiy < 1" [class.bi
+                                            bi-cart-fill]="product.quantiy >= 1"></i> -->
+
+                                    </button>
+                                    <button class="mx-2 btn btn-outline-danger btn-block"
+                                        (click)="addProductToWishlist(product.productId)">Add to wishlist &nbsp;<i
+                                            class="bi bi-bag-heart-fill"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /product -->
+        </div>
+    </div>
+    <!-- Products tab & slick -->
+</div>

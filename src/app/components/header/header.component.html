@@ -1,0 +1,72 @@
+<nav class="navbar navbar-expand-lg nav-bg navbar-dark sticky-top">
+  <div class="container d-flex">
+    <a class="navbar-brand" routerLink="/">ShopForHome</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="form-container">
+      <form class="d-flex justify-content-center" role="search">
+        <input class="form-control form-input" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-warning btn-square" type="submit"><i class="bi bi-search"></i></button>
+      </form>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item" [routerLinkActive]="['active']">
+          <a class="nav-link" aria-current="page" routerLink="/">Home</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Categories
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown" *ngFor="let category of categories">
+            <li><a class="dropdown-item" routerLink="/category/{{category.id}}">{{category.categoryName}}</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown" [routerLinkActive]="['active']">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Account
+          </a>
+          <ul *ngIf="this.loggedIn===false" class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" routerLink="/login">Login</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" routerLink="/register">Register</a></li>
+          </ul>
+          <ul *ngIf="this.loggedIn===true" class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" routerLink="/profile">My Profile</a></li>
+            <li><a class="dropdown-item" routerLink="/orders">My Orders</a></li>
+            <li><a class="dropdown-item" routerLink="/wishlist">My Wishlist</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" (click)="doSignOut()">Logout</a></li>
+          </ul>
+        </li>
+        <li *ngIf="this.loggedIn===true" class="nav-item" [routerLinkActive]="['active']">
+          <a class="nav-link" aria-current="page" routerLink="/cart"><i class="bi bi-cart-fill position-relative" (click)="this.reloadComponent('/cart')"><span
+                class="position-absolute top-0 mx-2 start-100 translate-middle badge rounded-pill bg-danger">{{this.cartLength}}
+                <span class="visually-hidden">unread messages</span>
+              </span></i></a>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</nav>
+<div class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="d-flex">
+    <div class="toast-body">
+      Hello, world! This is a toast message.
+    </div>
+    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+  </div>
+</div>

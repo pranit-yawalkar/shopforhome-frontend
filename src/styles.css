@@ -1,1 +1,32 @@
-/* You can add global styles to this file, and also import other style files */
+@import '~ngx-toastr/toastr';
+:root {
+    --primary: rgb(0, 53, 102);
+    --secondary: rgb(55, 151, 240);
+
+}
+
+body {
+    background-color: #dee2e6;
+}
+
+
+.card {
+    cursor: pointer;
+}
+
+.card img {
+    /* float: left; */
+    margin: auto;
+    width:  200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.disabled {
+    cursor: not-allowed;
+}
+
+.toast-top-right {
+    top: 10%;
+}
+  

@@ -1,0 +1,28 @@
+<div class="main-container">
+    <div class="form-container">
+        <h3 class="text-center pb-4">Login Form</h3>
+        <form [formGroup]="loginForm">
+            <div class="row mb-3">
+                <span class="mb-3 text-center text-danger" *ngIf="this.loginForm.invalid && this.loginForm.touched">* All fields are required</span>
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                    <input type="email" formControlName="email"  class="form-control" id="inputEmail3" placeholder="Enter your email here">
+                </div>
+            </div>
+            <div class="row mb-5">
+                <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                <div class="col-sm-10">
+                    <input type="password" formControlName="password" class="form-control" id="inputPassword3"
+                        placeholder="Enter your password here">
+                </div>
+            </div>
+            <div class="btn-container d-flex ">
+                <button type="submit" class="btn btn-primary btn-square px-5" (click)="doSignIn()">Sign in</button>
+            </div>
+            <div class="mt-3 text-center">
+                <span>Don't have an account?  </span>
+                <a routerLink="/register">Signup</a>
+            </div>
+        </form>
+    </div>
+</div>

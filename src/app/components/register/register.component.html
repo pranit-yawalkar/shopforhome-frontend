@@ -1,0 +1,70 @@
+<div *ngIf="errorOccured===true || registered===true" [ngClass]="errorOccured===true && registered===false ? 'alert-danger': 'alert-success'" class="alert alert-dismissible fade show" role="alert">{{errorOccured===true && registered===false ? 'Some Error Occured': 'Registered Successfully. Redirecting you to login page'}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<div class="main-container">
+    <div class="form-container mt-3 mb-4">
+    <h3 class="text-center py-3">Form Registration</h3>
+        <form class="row g-3" [formGroup]="registerForm">
+            <span *ngIf="registerForm.invalid" class="text-danger">* All fields
+                are required.</span>
+            <div class="col-md-6">
+                <label for="inputEmail4" class="form-label">First Name</label>
+                <input type="text" class="form-control" formControlName="firstName" id="inputEmail4" placeholder="Enter first name here">
+            </div>
+            <div class="col-md-6">
+                <label for="inputPassword4" class="form-label">Last Name</label>
+                <input type="text" class="form-control" formControlName="lastName" id="inputPassword4"
+                placeholder="Enter last name here">
+            </div>
+            <div class="col-md-6">
+                <label for="inputEmail4" class="form-label">Email</label>
+                <input type="email" class="form-control" formControlName="email" id="inputEmail4" 
+                placeholder="Enter email here">
+            </div>
+            <div class="col-md-6">
+                <label for="inputContact4" class="form-label">Contact Number</label>
+                <input type="number" class="form-control" formControlName="contactNumber" minlength="10" maxlength="10" id="inputContact4" 
+                placeholder="Enter contact number here">
+                <span *ngIf="registerForm.get('contactNumber')?.touched && registerForm.get('contactNumber')?.invalid" class="text-danger input-danger" >Please enter a valid number</span>
+            </div>
+            <div class="col-md-6">
+                <label for="inputPassword4" class="form-label">Password</label>
+                <input type="password" class="form-control" formControlName="password" id="inputPassword4"
+                placeholder="Enter password here" (change)="onPasswordChange()">
+                <span *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="text-danger input-danger">Password must have 8 characters with uppercase, lowercase, number and special characters</span>
+            </div>
+            <div class="col-md-6">
+                <label for="inputPassword4" class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" formControlName="confirmPassword" id="inputPassword4"
+                placeholder="Confirm your password" (change)="onPasswordChange()">
+                <span *ngIf="confirmPassword.hasError('mismatch')" class="text-danger input-danger">Password do not match</span>
+            </div>
+            <div class="col-12">
+                <label for="inputAddress" class="form-label">Address</label>
+                <input type="text" class="form-control" formControlName="address" id="inputAddress" placeholder="Flat no./Plot no. Apartment, Street, Landmark">
+            </div>
+            <div class="col-md-6">
+                <label for="inputCity" class="form-label">City</label>
+                <input type="text" class="form-control" formControlName="city" id="inputCity"
+                placeholder="city">
+            </div>
+            <div class="col-md-4">
+                <label for="inputState" class="form-label">State</label>
+                <input type="text" class="form-control" formControlName="state" d="inputState"
+                placeholder="state">
+            </div>
+            <div class="col-md-2">
+                <label for="inputZip" class="form-label">Zip Code</label>
+                <input type="text" class="form-control" formControlName="zipCode" id="inputZip"
+                placeholder="zip code">
+            </div> 
+            <div class="col-12 mt-5 mb-2 d-flex">
+                <button type="submit" [class.disabled]="registerForm.invalid" class="btn btn-success btn-square px-4" (click)="doSignUp()">Submit</button>
+            </div>
+            <div class="text-center">
+                <span>Already have an account ? then </span>
+                <a routerLink="/login">Login</a>
+            </div>
+        </form>
+    </div>
+</div>

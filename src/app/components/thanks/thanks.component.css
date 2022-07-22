@@ -1,0 +1,33 @@
+.main-container {
+    width: 70%;
+    margin: auto;
+    padding: 5em 0 12em 0;
+    border-radius: 0.5em;
+}
+.thanks-container {
+    padding: 3em;
+    background-color: #fff;
+    width: 60%;
+    margin: auto;
+    border-radius: 0.5em;
+}
+
+.thanks-container p {
+    font-size: 1.2rem;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+}
+
+@media screen and (max-width: 1080px) {
+    .main-container {
+        width: 90%;
+    }
+
+    .thanks-container {
+        width: 100%;
+    }
+    
+}

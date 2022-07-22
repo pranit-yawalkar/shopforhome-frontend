@@ -1,0 +1,55 @@
+<div class="section">
+    <div class="main-container">
+        <div class="container">
+            <h3 class="py-4 text-center">Your Cart</h3>
+            <table class="table" *ngIf="this.response!=null && this.response.cartItems.length>0; else elseTemplate">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col" class="img-head">Image</th>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="cartItem" *ngFor="let cartItem of response.cartItems; let i = index;">
+                        <th scope="row">{{i+1}}</th>
+                        <td class="img-row"><img src="{{cartItem.productDTO.imageUrl}}" alt=""></td>
+                        <td (click)="selectProduct(cartItem.productDTO.productId)">{{cartItem.productDTO.productName}}</td>
+                        <td><div class="qty-label d-flex justify-content-center">
+                                <div class="input-number d-flex">
+                                    <button class="qty-up btn btn-sm btn-secondary" (click)="decrease(cartItem.id, cartItem.productDTO.productId, i)">-</button>
+                                    <input type="number" class="form-control"
+                                        [max]="cartItem.productDTO.quantity >= 1 ? cartItem.productDTO.quantity : 0" readonly
+                                        value="{{cartItem.quantity >= 1 ? cartItem.quantity : 0}}">
+    
+                                    <button class="qty-down btn btn-sm btn-color" (click)="increase(cartItem.id,cartItem.productDTO.productId, i)">+</button>
+                                </div>
+                            </div></td>
+                        <td>{{cartItem.productDTO.price * cartItem.quantity | currency: 'INR'}}</td>
+                        <td class="text-center"><i (click)="removeProduct(cartItem.id)" class="bi bi-trash-fill text-danger"></i></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div *ngIf="this.response!=null && this.response.cartItems.length>0" class="total-cost me-4">
+                <h5 class="text-right mt-4">Total Cost: <span class="text-danger">{{response.totalCost | currency: 'INR'}}</span></h5>
+                <h5 class="text-right mt-4">Discount: <span class="text-danger">{{response.totalCost | currency: 'INR'}}</span></h5>
+                <h5 class="text-right mt-4">Amount to be paid: <span class="text-danger">{{response.totalCost | currency: 'INR'}}</span></h5>
+                <div class="input-group my-4">
+                    <input type="text" class="form-control" placeholder="Enter coupon code" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <button class="btn btn-warning" type="button" id="button-addon2">Apply</button>
+                </div>
+                <button class="btn btn-success mt-2" (click)="orderNow(this.response)">Order Now</button>
+            </div>
+            
+            <ng-template #elseTemplate>
+                <div class="text-center py-2">
+                    <i class="bi bi-cart"></i>
+                    <h5 class="text-danger">Your Cart is Empty</h5>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>

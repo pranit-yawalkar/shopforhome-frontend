@@ -1,0 +1,31 @@
+.main-container {
+    width: 70%;
+    margin: auto;
+    padding: 5em 0 12em 0;
+    border-radius: 0.5em;
+}
+.form-container {
+    padding: 3em;
+    background-color: #fff;
+    width: 60%;
+    margin: auto;
+    border-radius: 0.5em;
+}
+
+.form-container button {
+    margin: auto;
+
+}
+
+.btn-square {
+    border-radius: 0;
+}
+
+@media screen and (max-width: 1080px) {
+    .main-container {
+        width: 100%;
+    }
+    .form-container {
+        width: 100%;
+    }
+}

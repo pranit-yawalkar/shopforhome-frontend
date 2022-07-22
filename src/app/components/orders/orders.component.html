@@ -1,0 +1,35 @@
+<div class="section">
+    <div class="main-container">
+        <div class="container">
+            <h3 class="py-4 text-center">Your Orders</h3>
+            <table class="table" *ngIf="this.response!=null && this.response.length>0; else elseTemplate">
+                <thead>
+                    <tr class="text-center">
+                        <th scope="col">#</th>
+                        <th scope="col" class="img-head">Image</th>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Order Date</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="cartItem text-center" *ngFor="let order of response; let i = index;">
+                        <th scope="row">{{i+1}}</th>
+                        <td class="img-row"><img src="{{order.orderItem.product.imageUrl}}" alt=""></td>
+                        <td (click)="selectProduct(order.orderItem.product.id)">{{order.orderItem.product.productName}}</td>
+                        <td>{{order.createdDate.substr(0, 10)}}</td>
+                        <td>{{order.orderItem.quantity}}</td>
+                        <td>{{order.orderItem.product.price * order.orderItem.quantity | currency: 'INR'}}</td>
+                    </tr>
+                </tbody>
+            </table>            
+            <ng-template #elseTemplate>
+                <div class="text-center py-2">
+                    <i class="bi bi-cart"></i>
+                    <h5 class="text-danger">No orders to show</h5>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>

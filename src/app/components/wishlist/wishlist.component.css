@@ -1,0 +1,51 @@
+.container {
+    margin: 0.5em auto;
+    background-color: #fff;
+    border-radius: 0.5em;
+    padding-bottom: 15em;
+}
+
+
+.img-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    cursor: pointer;
+}
+
+.bi-bag-dash {
+    font-size: 10rem;
+}
+
+.img-container img {
+    margin: auto;
+}
+
+.card {
+    cursor: default;
+}
+
+.card-img-top {
+    margin: auto;
+}
+
+.card-header {
+    cursor: pointer;
+}
+
+.card-body {
+    cursor: pointer;
+}
+
+
+@media screen and (max-width: 1200px) and (min-width: 600px) {
+    .btn-container {
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+    }
+
+    .btn-container button {
+        margin-top: 0.5em;
+    }
+}

@@ -1,0 +1,57 @@
+.navbar-brand {
+    font-size: 1.5rem;
+}
+.nav-bg{
+    background-color: var(--primary);
+}
+
+.navbar-nav {
+    /* justify-content: space-around; */
+    text-align: center;
+}
+
+.btn-square {
+    border-radius: 0;
+}
+
+.bi-cart-fill {
+    font-size: 1.2rem;
+}
+
+.badge {
+    font-size: 0.7rem;
+}
+
+.form-container {
+    width: 60%;
+    margin: auto;
+}
+
+.form-control {
+    border-radius: 0;
+    justify-content: center;
+}
+
+.form-input {
+    width:60%;
+}
+
+
+@media screen and (max-width: 1080px) {
+    .navbar-nav {
+        margin: 0.5em 0;
+        font-size: 1.2rem;
+    }
+
+    .navbar-nav a {
+        margin: 0.3em 0;
+    }
+
+    .form-input, .form-container {
+        width: 100%;
+    }
+
+    .form-container {
+        margin-top: 0.5em;
+    }
+}

@@ -1,0 +1,28 @@
+.main-container {
+    margin: 0.5em auto;
+    background-color: #fff;
+    border-radius: 0.5em;
+    padding-bottom: 15em;
+}
+
+.img-row img {
+    width: 30px;
+}
+
+.cartItem{
+    transition: 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.cartItem:hover {
+    background-color: rgb(196, 196, 196);
+}
+
+@media screen and (max-width: 768px) {
+    .img-row {
+      display: none;
+    }
+    .img-head {
+        display: none;
+    }
+}
