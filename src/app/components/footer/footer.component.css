@@ -1,10 +1,18 @@
 #footer {
-    background: var(--primary);
+    
     color: #B9BABC;
 }
 
-#bottom-footer {
+.footer-bg {
     background: var(--primary);
+}
+
+.footer-admin-bg {
+    background-color: var(--secondary);
+}
+
+.footer-admin-bg a {
+    color: #FFF;
 }
 
 .footer {

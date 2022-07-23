@@ -1,0 +1,21 @@
+.img-row img {
+    width: 50px;
+}
+
+.main-container {
+    width: 100%;
+}
+
+i {
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.productItem{
+    transition: 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.productItem:hover {
+    background-color: rgb(196, 196, 196);
+}

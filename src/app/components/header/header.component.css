@@ -5,6 +5,16 @@
     background-color: var(--primary);
 }
 
+.nav-admin-bg {
+    background-color: var(--secondary);
+}
+
+.admin-nav-item {
+    width: 20%;
+    white-space: nowrap;
+}
+
+
 .navbar-nav {
     /* justify-content: space-around; */
     text-align: center;

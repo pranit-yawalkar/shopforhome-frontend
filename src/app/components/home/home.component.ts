@@ -9,6 +9,7 @@ import { ProductService } from 'src/app/services/product.service';
 import { WishlistService } from 'src/app/services/wishlist.service';
 import { AddToCart } from 'src/app/models/cart/add-to-cart';
 import { CartService } from 'src/app/services/cart.service';
+import { Catandproducts } from 'src/app/models/catandproducts';
 
 @Component({
   selector: 'app-home',
@@ -25,12 +26,14 @@ export class HomeComponent implements OnInit {
   flag!: string | null;
   addToWishlist!: Addtowishlist;
   addToCart!: AddToCart;
+  catAndProducts!: Catandproducts;
+  catArr: Catandproducts[] = []; 
 
   constructor(private proudctService: ProductService, private categoryService: CategoryService, private router: Router, private route: ActivatedRoute, private wishlistService: WishlistService, private toastrService: ToastrService, private cartService: CartService) { }
 
   ngOnInit(): void {
-    this.getAllProducts();
-    this.getAllCategories();
+    this.getCategoryAndProduct();
+    // console.log(this.catArr[0].products);
     this.token = localStorage.getItem('token');
     if (this.token != null) {
       this.loggedIn = true;
@@ -50,6 +53,27 @@ export class HomeComponent implements OnInit {
       console.log(this.products);
     })
     console.log(this.products);
+  }
+
+  getCategoryAndProduct(): void {
+    
+    this.categoryService.getAllCategories().subscribe(categories => {
+      categories.forEach(category => {
+        
+        this.proudctService.getProductByCategoryId(category.id).subscribe(products => {
+          this.catAndProducts = new Catandproducts();
+          this.catAndProducts.category = category;
+          this.catAndProducts.products = products;
+          // console.log(products);
+          this.catArr.push(this.catAndProducts);
+            // this.productsCat = products;
+            console.log(this.catArr);
+          })
+          console.log(this.catArr);
+          
+        })
+    })
+    console.log(this.catArr);
   }
 
   getAllCategories(): void {

@@ -1,0 +1,12 @@
+.img-row img {
+    width: 30px;
+}
+
+.orderItem{
+    transition: 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.orderItem:hover {
+    background-color: rgb(196, 196, 196);
+}

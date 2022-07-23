@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
       console.log(this.response);
       this.loggedIn = true;
       localStorage.setItem('token', this.response.message);
-      localStorage.setItem('role', this.response.role);
+      // localStorage.setItem('role', this.response.role);
       this.reloadComponent();
       this.toastrService.success("Keep Shopping...", "Logged In Successfully!!", {
         timeOut: 2000,

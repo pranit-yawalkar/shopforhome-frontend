@@ -1,13 +1,13 @@
 <div class="main-container">
     <div class="section pt-3">
         <h2 class="text-center">Our Products</h2>
-        <div class="container" *ngFor="let category of categories">
-            <h3>{{category.categoryName}}</h3>
+        <div class="container" *ngFor="let categoryItem of catArr">
+            <h3 *ngIf="categoryItem.products.length>0">{{categoryItem.category.categoryName}}</h3>
             <div class="row">
                 <div class="col-md-12">
                     <div class="row">
-                        <div class="col-md-4 col-sm-6" *ngFor="let product of products">
-                            <div class="card my-2" *ngIf="product!=null && category.id==product.categoryId">
+                        <div class="col-md-4 col-sm-6" *ngFor="let product of categoryItem.products">
+                            <div class="card my-2">
                                 <div class="img-container" (click)="selectProduct(product.productId)">
                                     <img [src]="product.imageUrl"
                                         alt="{{product.productName}}" class="card-img-top my-2 mx-auto">

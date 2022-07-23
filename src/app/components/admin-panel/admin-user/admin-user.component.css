@@ -1,0 +1,12 @@
+select {
+    width: 100%;
+}
+
+.main-container {
+    width: 100%;
+}
+
+i {
+    font-size: 1.2rem;
+    cursor: pointer;
+}

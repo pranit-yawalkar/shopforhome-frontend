@@ -1,0 +1,13 @@
+<div class="container main-container">
+    <ul class="list-group nav-container me-5 mt-3">
+        <li class="text-center"><h5>Admin Panel</h5></li>
+        <a routerLink="/admin-panel"><li class="list-group-item" routerLinkActive="is-active" [routerLinkActiveOptions]="{exact: true}">My Home</li></a>
+        <a routerLink="/admin-panel/categories"><li routerLinkActive="is-active" class="list-group-item">Categories</li></a>
+        <a routerLink="/admin-panel/products"><li routerLinkActive="is-active" class="list-group-item">Products</li></a>
+        <a routerLink="/admin-panel/users"><li routerLinkActive="is-active" class="list-group-item">Users</li></a>
+        <a routerLink="/admin-panel/orders"><li routerLinkActive="is-active" class="list-group-item">Orders</li></a>
+    </ul>
+    <div class="component-container">
+        <router-outlet *ngIf="this.user!= null && this.user.role==='admin'"></router-outlet>
+    </div>
+</div>

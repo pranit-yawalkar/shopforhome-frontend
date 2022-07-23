@@ -1,13 +1,14 @@
 @import '~ngx-toastr/toastr';
 :root {
     --primary: rgb(0, 53, 102);
-    --secondary: rgb(55, 151, 240);
-
+    /* --secondary: #0094c5; */
+    --secondary: #2874f0;
 }
 
 body {
     background-color: #dee2e6;
 }
+
 
 
 .card {

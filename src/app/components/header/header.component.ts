@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Category } from 'src/app/models/category';
+import { User } from 'src/app/models/user/user';
 import { CartService } from 'src/app/services/cart.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { UserService } from 'src/app/services/user.service';
@@ -18,6 +19,7 @@ export class HeaderComponent implements OnInit {
   flag!: boolean;
   cartLength!: number;
   token!: string | null;
+  role!: string | null;
 
   constructor(private categoryService: CategoryService, private userService: UserService, private toastrService: ToastrService, private router: Router,
     private route: ActivatedRoute, private cartService: CartService) { }
@@ -27,6 +29,10 @@ export class HeaderComponent implements OnInit {
     this.token = localStorage.getItem('token');
     if(this.token!=null) {
       this.loggedIn = true;
+      // this.role = localStorage.getItem('role');
+      this.userService.getUserByToken(this.token).subscribe(user=> {
+        this.role = user.role;
+      })
       this.cartLength = this.getCartItemCount(this.token);
     }
   }
@@ -37,9 +43,14 @@ export class HeaderComponent implements OnInit {
     this.router.navigate([path]);
   }
 
+  selectCategory(id: number) {
+    this.reloadComponent(`/category/${id}`);
+  }
+
   getAllCategories(): void {
     this.categoryService.getAllCategories().subscribe(categories => {
       this.categories = categories;
+      console.log(this.categories);
     },
       error => {
         console.log(error);

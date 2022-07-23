@@ -1,0 +1,52 @@
+.container {
+    margin: 0.5em auto;
+    background-color: #fff;
+    border-radius: 0.5em;
+}
+
+.is-active {
+    background-color: var(--secondary);
+    color: #fff;
+}
+
+.main-container{
+    display: flex;
+    padding-bottom: 20em;
+}
+
+.nav-container {
+    width: 20%;
+}
+
+.nav-container .list-group-item a  {
+    text-decoration: none;
+    color: #000;
+}
+ 
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+li {
+    list-style: none;
+}
+
+.nav-container .list-group-item {
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+.nav-container .list-group-item:hover, .nav-container .list-group-item:active{
+    background-color: var(--secondary);
+    color: #fff;
+}
+
+.nav-container .list-group-item a:hover, .nav-container .list-group-item a:active {
+    color: #fff;
+}
+
+.component-container {
+    width: 70%;
+}
+

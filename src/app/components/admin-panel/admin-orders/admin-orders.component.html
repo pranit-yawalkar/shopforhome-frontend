@@ -1,26 +1,29 @@
-<div class="section">
-    <div class="main-container">
-        <div class="container">
-            <h3 class="py-4 text-center">Your Orders</h3>
+<div class="main-container">
+            <h3 class="top my-3">Orders</h3>
             <table class="table" *ngIf="this.response!=null && this.response.length>0; else elseTemplate">
                 <thead>
                     <tr class="text-center">
                         <th scope="col">#</th>
                         <th scope="col" class="img-head">Image</th>
                         <th scope="col">Product Name</th>
+                        <th scope="col">User Id</th>
                         <th scope="col">Order Date</th>
                         <th scope="col">Quantity</th>
                         <th scope="col">Price</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr (click)="selectProduct(order.orderItem.product.id)" class="cartItem text-center" *ngFor="let order of response; let i = index;">
+                    <tr class="orderItem text-center" *ngFor="let order of response; let i = index;">
                         <th scope="row">{{i+1}}</th>
-                        <td class="img-row"><img src="{{order.orderItem.product.imageUrl}}" alt=""></td>
-                        <td>{{order.orderItem.product.productName}}</td>
+                        <td (click)="selectProduct(order.orderItem.product.id)"class="img-row"><img src="{{order.orderItem.product.imageUrl}}" alt=""></td>
+                        <td (click)="selectProduct(order.orderItem.product.id)">{{order.orderItem.product.productName.substr(0,20)}}</td>
+                        <td>{{order.userId}}</td>
                         <td>{{order.createdDate.substr(0, 10)}}</td>
                         <td>{{order.orderItem.quantity}}</td>
                         <td>{{order.orderItem.product.price * order.orderItem.quantity | currency: 'INR'}}</td>
+                        <td><i
+                        class="bi bi-trash-fill text-danger mx-2" (click)="deleteOrder(order.id)"></i></td>
                     </tr>
                 </tbody>
             </table>            
@@ -31,5 +34,3 @@
                 </div>
             </ng-template>
         </div>
-    </div>
-</div>

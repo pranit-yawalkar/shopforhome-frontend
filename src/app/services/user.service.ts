@@ -25,4 +25,21 @@ export class UserService {
   getUserByToken(token: string): Observable<User> {
     return this.http.get<User> (`${this.BASE_URL}/user/getuser?token=${token}`);
   }
+
+  getAllUsers(role: string): Observable<User[]> {
+      return this.http.get<User[]> (`${this.BASE_URL}/user/getAll?role=${role}`);
+  }
+
+  getUserById(id: number, role: string): Observable<User> {
+    return this.http.get<User> (`${this.BASE_URL}/user/get/${id}?role=${role}`)
+  }
+
+  updateUser(id: number, role: string, user: User): Observable<Object> {
+    return this.http.put(`${this.BASE_URL}/user/update/${id}?role=${role}`, user);
+  }
+
+  deleteUser(id: number, role: string): Observable<Object> {
+    return this.http.delete(`${this.BASE_URL}/user/delete/${id}?role=${role}`);
+  }
+
 }

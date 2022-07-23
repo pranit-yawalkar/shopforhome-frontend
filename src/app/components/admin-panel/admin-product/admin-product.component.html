@@ -1,0 +1,180 @@
+<div class="main-container">
+    <div class="top my-3 d-flex justify-content-between">
+        <h3>Products</h3>
+        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addModal"
+            (click)="onClickAddButton()">Add Product</button>
+    </div>
+    <table class="table text-center">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Image</th>
+                <th scope="col">Product Name</th>
+                <th scope="col">Category Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Price</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="productItem" *ngFor="let product of productCats; let i=index">
+                <th scope="row">{{i+1}}</th>
+                <td class="img-row"><img [src]="product.imageUrl" alt=""></td>
+                <td>{{product.productName.substr(0,20)}}</td>
+                <td>{{product.categoryName}}</td>
+                <td>{{product.description.substr(0, 20)}}</td>
+                <td>{{product.price | currency: "INR"}}</td>
+                <td><i class="bi bi-pencil-square text-primary mx-2" data-bs-toggle="modal"
+                        data-bs-target="#updateModal" (click)="onClickUpdateButton(product.productId)"></i><i
+                        class="bi bi-trash-fill text-danger mx-2" (click)="deleteProduct(product.productId)"></i></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addModalLabel">Add your product</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="productForm">
+                    <div class="mb-3">
+                        <label for="productName" class="col-form-label">Product Name:</label>
+                        <input formControlName="productName" type="text" name="productName" class="form-control"
+                            id="productName" placeholder="Enter product name here">
+                        <small
+                            *ngIf="productForm.get('productName')?.invalid && productForm.get('productName')?.touched"
+                            class="text-danger mx-2">This field is required</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="categoryName" class="col-form-label">Category Name: &nbsp;</label>
+                        <!-- <input formControlName="categoryName" type="text" name="categoryName" class="form-control" id="categoryName" placeholder="Enter category name here" > -->
+
+                        <select formControlName="categoryName" id="categoryName">
+                            <option value="Select a category" selected="selected" hidden="hidden">Select a category</option>
+                             <option *ngFor="let category of categories" [ngValue]="category.categoryName">{{category.categoryName}}</option>
+                        </select>
+                        <small
+                            *ngIf="productForm.get('categoryName')?.invalid && productForm.get('categoryName')?.touched"
+                            class="text-danger mx-2">This field is required</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="imageUrl" class="col-form-label">Image url:</label>
+                        <input formControlName="imageUrl" type="text" name="imageUrl" class="form-control" id="imageUrl"
+                            placeholder="Enter image url here">
+                        <small *ngIf="productForm.get('imageUrl')?.invalid && productForm.get('imageUrl')?.touched"
+                            class="text-danger mx-2">This field is required</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="price" class="col-form-label">Price: </label>
+                        <input formControlName="price" type="number" name="price" class="form-control" id="price"
+                            placeholder="Enter price here">
+                        <small *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched"
+                            class="text-danger mx-2">This field is required</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="quantity" class="col-form-label">Quantity:</label>
+                        <input formControlName="quantity" type="number" name="quantity" class="form-control"
+                            id="quantity" placeholder="Enter quantity here">
+                        <small *ngIf="productForm.get('quantity')?.invalid && productForm.get('quantity')?.touched"
+                            class="text-danger mx-2">This field is required</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="col-form-label">Description:</label>
+                        <textarea
+                            [ngClass]="{'is-invalid': productForm.get('description')?.invalid && productForm.get('description')?.touched}"
+                            formControlName="description" class="form-control" name="description"
+                            placeholder="Enter description here"></textarea>
+                        <small
+                            *ngIf="productForm.get('description')?.invalid && productForm.get('description')?.touched"
+                            class="text-danger mx-2">Min 10 characters required</small>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button [disabled]="productForm.invalid" type="submit" data-bs-dismiss="modal"
+                            class="btn btn-primary" (click)="addProduct()">Submit</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateModalLabel">Update Category</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="productForm">
+                    <div class="mb-3">
+                        <label for="productName" class="col-form-label">Product Name:</label>
+                        <input formControlName="productName" type="text" name="productName" class="form-control"
+                            id="productName" placeholder="Enter product name here">
+                        <small
+                            *ngIf="productForm.get('productName')?.invalid && productForm.get('productName')?.touched"
+                            class="text-danger mx-2">This field is required</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="categoryName" class="col-form-label">Category Name: &nbsp;</label>
+                        <!-- <input formControlName="categoryName" type="text" name="categoryName" class="form-control" id="categoryName" placeholder="Enter category name here" > -->
+
+                        <select formControlName="categoryName" id="categoryName">
+                            <option value="Select a category" selected="selected" hidden="hidden">Select a category</option>
+                             <option *ngFor="let category of categories" [ngValue]="category.categoryName">{{category.categoryName}}</option>
+                        </select>
+                        <small
+                            *ngIf="productForm.get('categoryName')?.invalid && productForm.get('categoryName')?.touched"
+                            class="text-danger mx-2">This field is required</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="imageUrl" class="col-form-label">Image url:</label>
+                        <input formControlName="imageUrl" type="text" name="imageUrl" class="form-control" id="imageUrl"
+                            placeholder="Enter image url here">
+                        <small *ngIf="productForm.get('imageUrl')?.invalid && productForm.get('imageUrl')?.touched"
+                            class="text-danger mx-2">This field is required</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="price" class="col-form-label">Price: </label>
+                        <input formControlName="price" type="number" name="price" class="form-control" id="price"
+                            placeholder="Enter price here">
+                        <small *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched"
+                            class="text-danger mx-2">This field is required</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="quantity" class="col-form-label">Quantity:</label>
+                        <input formControlName="quantity" type="number" name="quantity" class="form-control"
+                            id="quantity" placeholder="Enter quantity here">
+                        <small *ngIf="productForm.get('quantity')?.invalid && productForm.get('quantity')?.touched"
+                            class="text-danger mx-2">This field is required</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="col-form-label">Description:</label>
+                        <textarea
+                            [ngClass]="{'is-invalid': productForm.get('description')?.invalid && productForm.get('description')?.touched}"
+                            formControlName="description" class="form-control" name="description"
+                            placeholder="Enter description here"></textarea>
+                        <small
+                            *ngIf="productForm.get('description')?.invalid && productForm.get('description')?.touched"
+                            class="text-danger mx-2">Min 10 characters required</small>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button [disabled]="productForm.invalid" type="submit" data-bs-dismiss="modal"
+                            class="btn btn-primary" (click)="updateProduct()">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -19,6 +19,12 @@ import { WishlistComponent } from './components/wishlist/wishlist.component';
 import { CartComponent } from './components/cart/cart.component';
 import { ToastrModule } from 'ngx-toastr';
 import { ThanksComponent } from './components/thanks/thanks.component';
+import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
+import { AdminHomeComponent } from './components/admin-panel/admin-home/admin-home.component';
+import { AdminCategoryComponent } from './components/admin-panel/admin-category/admin-category.component';
+import { AdminUserComponent } from './components/admin-panel/admin-user/admin-user.component';
+import { AdminProductComponent } from './components/admin-panel/admin-product/admin-product.component';
+import { AdminOrdersComponent } from './components/admin-panel/admin-orders/admin-orders.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +40,13 @@ import { ThanksComponent } from './components/thanks/thanks.component';
     OrdersComponent,
     WishlistComponent,
     CartComponent,
-    ThanksComponent
+    ThanksComponent,
+    AdminPanelComponent,
+    AdminHomeComponent,
+    AdminCategoryComponent,
+    AdminUserComponent,
+    AdminProductComponent,
+    AdminOrdersComponent,
   ],
   imports: [
     BrowserModule,

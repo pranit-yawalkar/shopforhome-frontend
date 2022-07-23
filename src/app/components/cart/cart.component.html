@@ -35,7 +35,7 @@
             </table>
             <div *ngIf="this.response!=null && this.response.cartItems.length>0" class="total-cost me-4">
                 <h5 class="text-right mt-4">Total Cost: <span class="text-danger">{{response.totalCost | currency: 'INR'}}</span></h5>
-                <h5 class="text-right mt-4">Discount: <span class="text-danger">{{response.totalCost | currency: 'INR'}}</span></h5>
+                <h5 class="text-right mt-4">Discount: <span class="text-danger">{{0 | currency: 'INR'}}</span></h5>
                 <h5 class="text-right mt-4">Amount to be paid: <span class="text-danger">{{response.totalCost | currency: 'INR'}}</span></h5>
                 <div class="input-group my-4">
                     <input type="text" class="form-control" placeholder="Enter coupon code" aria-label="Recipient's username" aria-describedby="button-addon2">

@@ -90,7 +90,6 @@ export class CategoryComponent implements OnInit {
       this.addToCart.quantity = 1;
       this.cartService.addProduct(this.token, this.addToCart).subscribe(response => {
         this.response = response;
-        this.reloadComponent(id);
         this.toastrService.success("Product added to cart!", "Success", {
           timeOut: 3000,
           progressBar: true,

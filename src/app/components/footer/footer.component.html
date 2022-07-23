@@ -1,5 +1,5 @@
 
-<footer id="footer">
+<footer id="footer" [ngClass]="{'footer-bg': this.role==='user' || this.role==null, 'footer-admin-bg': this.role==='admin'}">
     <!-- top footer -->
     <div class="section">
         <!-- container -->

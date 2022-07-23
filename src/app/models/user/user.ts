@@ -1,4 +1,5 @@
 export class User {
+    id!: number;
     firstName!:string;
     lastName!: string;
     email!: string;
@@ -8,4 +9,5 @@ export class User {
     state!: string;
     zipCode!: number;
     contactNumber!: number;
+    role!: string;
 }
