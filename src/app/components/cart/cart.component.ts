@@ -17,10 +17,16 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class CartComponent implements OnInit {
   response!: any;
+  discount!: string | null;
+  discountAmount!: number;
   cart!: Cart;
   token!: string | null;
   addToCart!: AddToCart;
   coupons!: Coupon[];
+  coupon!: Coupon;
+  code!: string;
+
+
   @ViewChild('quantity') quantityInput: any;
 
   constructor(private cartService: CartService, private toastrService: ToastrService, private router: Router, private orderService: OrderService, 
@@ -28,6 +34,12 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = localStorage.getItem('token');
+    if(localStorage.getItem('discount')!=null) {
+      this.discount = localStorage.getItem('discount')
+      if(this.discount!=null) {
+        this.discountAmount = parseInt(this.discount);
+      }
+    }
     if(this.token != null) {
       this.getAllProducts(this.token);
       this.getAllCoupons(this.token);
@@ -83,7 +95,6 @@ export class CartComponent implements OnInit {
   getAllProducts(token: string): void {
     this.cartService.getAllProducts(token).subscribe(cart => {
       this.response = cart;
-      console.log(cart);
     })
   }
 
@@ -129,6 +140,7 @@ export class CartComponent implements OnInit {
     if(this.token!=null) {
       this.orderService.placeOrder(this.token, cart).subscribe(response=> {
         console.log(response);
+        localStorage.removeItem('discount');
         this.reloadComponent('/thanks');
       }, error=> {
         console.log(error);
@@ -152,5 +164,35 @@ export class CartComponent implements OnInit {
       });
     })
   }
+
+  onSubmit() {
+    this.token = localStorage.getItem('token');
+    if(this.token!=null) {
+       this.applyCoupon(this.token, this.code);
+    } else {
+      console.log("Access Denied!");
+    }
+  }
+
+  applyCoupon(token: string, code: string): void {
+      this.discountService.getCouponByCode(code).subscribe(coupon=>{
+        console.log(coupon);
+        this.discountService.applyCoupon(token, coupon).subscribe(res=>{
+         this.cart = res;
+         localStorage.setItem('discount', this.cart.discount.toString());
+          this.toastrService.success("Coupon applied successfully!", "Success", {
+            timeOut: 3000,
+            progressBar: true
+          })
+          this.reloadComponent('/cart');
+        })
+      }, error=>{
+        this.toastrService.error("Something went wrong!", "Error", {
+          timeOut: 3000,
+          progressBar: true
+        })
+        console.log(error);
+      })
+    } 
 
 }

@@ -14,6 +14,8 @@ export class AdminOrdersComponent implements OnInit {
   response!: any;
   token!: string | null;
   user!: User;
+  map: any = {};
+  
 
   constructor(private orderService: OrderService, private userService: UserService, private router: Router, private toastrService: ToastrService) { }
 
@@ -21,6 +23,7 @@ export class AdminOrdersComponent implements OnInit {
     this.token = localStorage.getItem('token');
     if (this.token != null) {
       this.getAllSortedOrders(this.token);
+      this.mapOrdersToDate(this.token);
     }
   }
 
@@ -42,6 +45,17 @@ export class AdminOrdersComponent implements OnInit {
   selectProduct(id: number): void {
     console.log(id);
     this.router.navigate(['/product', id]);
+  }
+
+  mapOrdersToDate(token: string): void {
+    this.userService.getUserByToken(token).subscribe(user => {
+      this.orderService.getAllSortedOrders(user.role).subscribe(response => {
+        this.response.forEach((order: any)=>{
+          this.map[order.createdDate.substr(0,10)] = (this.map[order.createdDate.substr(0,10)] || 0) + 1;
+        })
+        console.log(this.map);
+      })
+    })
   }
 
   deleteOrder(id: number): void {

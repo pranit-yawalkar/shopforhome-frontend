@@ -24,6 +24,10 @@ export class OrderService {
     return this.http.get<Object> (`${this.BASE_URL}/order/getAllSorted?role=${role}`);
   }
 
+  getAllSortedOrdersAsc(role: string): Observable<Object> {
+    return this.http.get<Object> (`${this.BASE_URL}/order/getAllSortedAsc?role=${role}`);
+  }
+
   deleteOrder(orderId: number, role: string): Observable<Object> {
     return this.http.delete(`${this.BASE_URL}/order/delete/${orderId}?role=${role}`);
   }

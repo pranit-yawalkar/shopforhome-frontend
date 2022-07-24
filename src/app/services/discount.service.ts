@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Cart } from '../models/cart/cart';
 import { Coupon } from '../models/coupon';
 
 @Injectable({
@@ -32,5 +33,12 @@ export class DiscountService {
     return this.http.post(`${this.BASE_URL}/coupon/create?role=${role}`, coupon);
   }
 
+  applyCoupon(token: string, coupon: Coupon): Observable<Cart> {
+    return this.http.post<Cart>(`${this.BASE_URL}/cart/applyCoupon?token=${token}`, coupon);
+  }
+
+  getCouponByCode(code: string): Observable<Coupon> {
+    return this.http.get<Coupon>(`${this.BASE_URL}/coupon/getCoupon/${code}`);
+  }
 
 }
