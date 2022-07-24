@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AdminCategoryComponent } from './components/admin-panel/admin-category/admin-category.component';
+import { AdminDiscountComponent } from './components/admin-panel/admin-discount/admin-discount.component';
 import { AdminHomeComponent } from './components/admin-panel/admin-home/admin-home.component';
 import { AdminOrdersComponent } from './components/admin-panel/admin-orders/admin-orders.component';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
@@ -39,8 +40,8 @@ const routes: Routes = [
     {path: 'categories', component: AdminCategoryComponent},
     {path: 'products', component: AdminProductComponent},
     {path: 'users', component: AdminUserComponent},
-    {path: 'orders', component: AdminOrdersComponent}
-    
+    {path: 'orders', component: AdminOrdersComponent},
+    {path: 'coupons', component: AdminDiscountComponent}
   ]}
 ];
 

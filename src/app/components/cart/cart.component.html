@@ -17,33 +17,54 @@
                     <tr class="cartItem" *ngFor="let cartItem of response.cartItems; let i = index;">
                         <th scope="row">{{i+1}}</th>
                         <td class="img-row"><img src="{{cartItem.productDTO.imageUrl}}" alt=""></td>
-                        <td (click)="selectProduct(cartItem.productDTO.productId)">{{cartItem.productDTO.productName}}</td>
-                        <td><div class="qty-label d-flex justify-content-center">
+                        <td (click)="selectProduct(cartItem.productDTO.productId)">{{cartItem.productDTO.productName}}
+                        </td>
+                        <td>
+                            <div class="qty-label d-flex justify-content-center">
                                 <div class="input-number d-flex">
-                                    <button class="qty-up btn btn-sm btn-secondary" (click)="decrease(cartItem.id, cartItem.productDTO.productId, i)">-</button>
+                                    <button class="qty-up btn btn-sm btn-secondary"
+                                        (click)="decrease(cartItem.id, cartItem.productDTO.productId, i)">-</button>
                                     <input type="number" class="form-control"
-                                        [max]="cartItem.productDTO.quantity >= 1 ? cartItem.productDTO.quantity : 0" readonly
-                                        value="{{cartItem.quantity >= 1 ? cartItem.quantity : 0}}">
-    
-                                    <button class="qty-down btn btn-sm btn-color" (click)="increase(cartItem.id,cartItem.productDTO.productId, i)">+</button>
+                                        [max]="cartItem.productDTO.quantity >= 1 ? cartItem.productDTO.quantity : 0"
+                                        readonly value="{{cartItem.quantity >= 1 ? cartItem.quantity : 0}}">
+
+                                    <button class="qty-down btn btn-sm btn-color"
+                                        (click)="increase(cartItem.id,cartItem.productDTO.productId, i)">+</button>
                                 </div>
-                            </div></td>
+                            </div>
+                        </td>
                         <td>{{cartItem.productDTO.price * cartItem.quantity | currency: 'INR'}}</td>
-                        <td class="text-center"><i (click)="removeProduct(cartItem.id)" class="bi bi-trash-fill text-danger"></i></td>
+                        <td class="text-center"><i (click)="removeProduct(cartItem.id)"
+                                class="bi bi-trash-fill text-danger"></i></td>
                     </tr>
                 </tbody>
             </table>
-            <div *ngIf="this.response!=null && this.response.cartItems.length>0" class="total-cost me-4">
-                <h5 class="text-right mt-4">Total Cost: <span class="text-danger">{{response.totalCost | currency: 'INR'}}</span></h5>
-                <h5 class="text-right mt-4">Discount: <span class="text-danger">{{0 | currency: 'INR'}}</span></h5>
-                <h5 class="text-right mt-4">Amount to be paid: <span class="text-danger">{{response.totalCost | currency: 'INR'}}</span></h5>
+            <div *ngIf="this.response!=null && this.response.cartItems.length>0" class="total-cost my-5">
+                <div class="cost-container">
+                    <div class="coupon-detail pt-2">
+                        <h6 class="py-2">Coupons: </h6>
+                        <div class="d-flex" *ngFor="let coupon of coupons | slice:0:3; let i=index">
+                            <p>{{(i+1) + ". "}}</p>
+                            <p class="text-primary fw-bold ms-1">{{coupon.code}}</p>
+                            <p>: Get {{coupon.percentage}} % off. Apply coupon.</p>
+                        </div>
+                    </div>
+                    <div class="cost-detail">
+                        <h5 class="text-right mt-4">Total Cost: <span class="text-danger">{{response.totalCost | currency:
+                                'INR'}}</span></h5>
+                        <h5 class="text-right mt-4">Discount: <span class="text-danger">{{0 | currency: 'INR'}}</span></h5>
+                        <h5 class="text-right mt-4">Amount to be paid: <span class="text-danger">{{response.totalCost |
+                                currency: 'INR'}}</span></h5>
+                    </div>
+                </div>
                 <div class="input-group my-4">
-                    <input type="text" class="form-control" placeholder="Enter coupon code" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <input type="text" class="form-control" placeholder="Enter coupon code"
+                        aria-label="Recipient's username" aria-describedby="button-addon2">
                     <button class="btn btn-warning" type="button" id="button-addon2">Apply</button>
                 </div>
                 <button class="btn btn-success mt-2" (click)="orderNow(this.response)">Order Now</button>
             </div>
-            
+
             <ng-template #elseTemplate>
                 <div class="text-center py-2">
                     <i class="bi bi-cart"></i>

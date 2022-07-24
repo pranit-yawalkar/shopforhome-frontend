@@ -57,9 +57,20 @@ tr {
     width: 30%;
 }
 
+.cost-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
 @media screen and (max-width: 1080px) {
     .input-group {
         width: 80%;
+    }
+
+    .cost-container {
+        flex-direction: column;
+        align-items: center;
     }
 }
 

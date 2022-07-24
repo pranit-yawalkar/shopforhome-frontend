@@ -3,9 +3,12 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AddToCart } from 'src/app/models/cart/add-to-cart';
 import { Cart } from 'src/app/models/cart/cart';
+import { Coupon } from 'src/app/models/coupon';
 import { Product } from 'src/app/models/product';
 import { CartService } from 'src/app/services/cart.service';
+import { DiscountService } from 'src/app/services/discount.service';
 import { OrderService } from 'src/app/services/order.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-cart',
@@ -17,14 +20,17 @@ export class CartComponent implements OnInit {
   cart!: Cart;
   token!: string | null;
   addToCart!: AddToCart;
+  coupons!: Coupon[];
   @ViewChild('quantity') quantityInput: any;
 
-  constructor(private cartService: CartService, private toastrService: ToastrService, private router: Router, private orderService: OrderService) { }
+  constructor(private cartService: CartService, private toastrService: ToastrService, private router: Router, private orderService: OrderService, 
+    private discountService: DiscountService, private userService: UserService) { }
 
   ngOnInit(): void {
     this.token = localStorage.getItem('token');
     if(this.token != null) {
       this.getAllProducts(this.token);
+      this.getAllCoupons(this.token);
     }
   }
 
@@ -102,7 +108,7 @@ export class CartComponent implements OnInit {
         timeOut: 3000,
         progressBar: true
       })
-      console.log("Something went wrong..");
+      console.log("Something went wrong...");
     }
   }
 
@@ -121,8 +127,6 @@ export class CartComponent implements OnInit {
 
   orderNow(cart: Cart): void {
     if(this.token!=null) {
-      // this.cart = new Cart();
-      // this.cart.cartItems = cartItems.
       this.orderService.placeOrder(this.token, cart).subscribe(response=> {
         console.log(response);
         this.reloadComponent('/thanks');
@@ -139,6 +143,14 @@ export class CartComponent implements OnInit {
         progressBar: true
       })
     }
+  }
+
+  getAllCoupons(token: string): void {
+    this.userService.getUserByToken(token).subscribe(user=>{
+      this.discountService.getAllCoupons(user.role).subscribe(coupons=>{
+        this.coupons = coupons;
+      });
+    })
   }
 
 }

@@ -64,4 +64,9 @@
     .form-container {
         margin-top: 0.5em;
     }
+
+    .admin-nav-item {
+        margin-left: 15em;
+
+    }
 }
