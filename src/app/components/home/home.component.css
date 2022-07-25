@@ -5,6 +5,23 @@
     padding-bottom: 15em;
 }
 
+.filter-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 1.2em;
+}
+
+.filter-container h2 {
+    margin: auto;
+    padding-left: 5em;
+}
+
+select, option {
+    width: 80px;
+    margin-right: 50px;
+}
+
+
 .product-details .add-to-cart .add-to-cart-btn {
     position: relative;
     border: 2px solid transparent;
@@ -81,4 +98,24 @@
     .btn-container button {
         margin-top: 0.5em;
     }
+
+    .filter-container h2 {
+       padding: 0;
+       margin: 0;
+    }
+
+    .filter-container {
+        font-size: 0.8rem;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .filter-container h2 {
+        padding: 0;
+        margin: 0;
+     }
+     .filter-container {
+        justify-content: space-between;
+        font-size: 0.8rem;
+     }
 }

@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit {
   catAndProducts!: Catandproducts;
   catArr: Catandproducts[] = []; 
   searchValue!: string | null;
+  filterValue!: string | null;
 
   constructor(private proudctService: ProductService, private categoryService: CategoryService, private router: Router, private route: ActivatedRoute, private wishlistService: WishlistService, private toastrService: ToastrService, private cartService: CartService) { }
 
@@ -47,12 +48,64 @@ export class HomeComponent implements OnInit {
     } else {
       this.products = [];
     }
+
+    this.filterValue = this.route.snapshot.queryParamMap.get('filter');
+    if(this.filterValue!=null) {
+      if(this.filterValue=='lowToHigh') {
+        this.sortLowToHigh();
+      }
+      if(this.filterValue=='highToLow') {
+        this.sortHighToLow();
+      }
+    }
   }
 
   reloadComponent() {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate(['']);
+  }
+  
+  reloadOnSort(path: string, queryParams: any) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate([path], queryParams);
+  }
+
+  
+
+  sortLowToHigh(): void {
+    this.proudctService.getAllProducts().subscribe(products=>{
+      this.products = products;
+      this.products = this.products.sort((product1, product2)=>{
+        if(product1.price > product2.price) {
+          return 1;
+        }
+        if(product1.price < product2.price) {
+          return -1;
+        }
+        return 0;
+      })
+    })
+  }
+
+  sortHighToLow(): void {
+    this.proudctService.getAllProducts().subscribe(products=>{
+      this.products = products;
+      this.products = this.products.sort((product1, product2)=>{
+        if(product1.price > product2.price) {
+          return -1;
+        }
+        if(product1.price < product2.price) {
+          return 1;
+        }
+        return 0;
+      })
+    })
+  }
+
+  onChange(val: any) {
+    this.reloadOnSort('', {queryParams: {filter: val.target.value}})
   }
 
   getAllProducts(): void {
