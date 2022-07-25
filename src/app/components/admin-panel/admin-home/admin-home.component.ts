@@ -42,7 +42,7 @@ export class AdminHomeComponent implements OnInit {
               labels: this.labels,
               datasets: [
                 {
-                  label: 'Orders this week',
+                  label: 'Orders',
                   data: this.values,
                   borderWidth: 3,
                   backgroundColor: 'rgba(93, 175, 89, 0.1)',

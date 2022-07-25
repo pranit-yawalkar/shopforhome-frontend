@@ -20,6 +20,7 @@ export class HeaderComponent implements OnInit {
   cartLength!: number;
   token!: string | null;
   role!: string | null;
+  searchValue!: string | null;
 
   constructor(private categoryService: CategoryService, private userService: UserService, private toastrService: ToastrService, private router: Router,
     private route: ActivatedRoute, private cartService: CartService) { }
@@ -35,12 +36,22 @@ export class HeaderComponent implements OnInit {
       })
       this.cartLength = this.getCartItemCount(this.token);
     }
+
+    if(this.route.snapshot.paramMap.get('search')!=null) {
+      this.searchValue = this.route.snapshot.paramMap.get('search');
+    }
   }
 
   reloadComponent(path: string) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate([path]);
+  }
+
+  reloadOnSearch(path: string, queryParams: any) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate([path], queryParams);
   }
 
   selectCategory(id: number) {
@@ -55,6 +66,13 @@ export class HeaderComponent implements OnInit {
       error => {
         console.log(error);
     })
+  }
+
+  search(): void {
+    if(this.searchValue!=null) {
+      console.log(this.searchValue);
+      this.reloadOnSearch('', {queryParams: {search: this.searchValue}});
+    }
   }
 
   doSignOut(): void {

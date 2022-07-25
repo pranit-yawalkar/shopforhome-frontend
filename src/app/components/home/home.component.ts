@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit {
   addToCart!: AddToCart;
   catAndProducts!: Catandproducts;
   catArr: Catandproducts[] = []; 
+  searchValue!: string | null;
 
   constructor(private proudctService: ProductService, private categoryService: CategoryService, private router: Router, private route: ActivatedRoute, private wishlistService: WishlistService, private toastrService: ToastrService, private cartService: CartService) { }
 
@@ -38,6 +39,13 @@ export class HomeComponent implements OnInit {
     if (this.token != null) {
       this.loggedIn = true;
       console.log(this.loggedIn);
+    }
+
+    this.searchValue = this.route.snapshot.queryParamMap.get('search');
+    if(this.searchValue!=null) {
+      this.searchProducts(this.searchValue);
+    } else {
+      this.products = [];
     }
   }
 
@@ -66,15 +74,27 @@ export class HomeComponent implements OnInit {
           this.catAndProducts.products = products;
           // console.log(products);
           this.catArr.push(this.catAndProducts);
-            // this.productsCat = products;
-            console.log(this.catArr);
           })
-          console.log(this.catArr);
           
         })
     })
-    console.log(this.catArr);
   }
+
+  searchProducts(searchValue: string): void {
+    this.proudctService.getAllProducts().subscribe(products=>{
+      this.products = products;
+      if(searchValue!=null) {
+        console.log(searchValue);
+        console.log(this.products);
+          this.products = this.products.filter(product=>
+            product.productName.toLowerCase().includes(searchValue.toLowerCase()));
+          // this.catArr.push(category.products);
+          console.log(this.products);
+        }
+      })
+    }
+  
+  
 
   getAllCategories(): void {
     this.categoryService.getAllCategories().subscribe(categories => {
@@ -149,5 +169,7 @@ export class HomeComponent implements OnInit {
       console.log("Please login to add");
     }
   }
+
+  
 
 }
