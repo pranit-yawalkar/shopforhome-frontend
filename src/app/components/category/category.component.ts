@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Addtowishlist } from 'src/app/models/wishlist/addtowishlist';
-import { Category } from 'src/app/models/category';
-import { Product } from 'src/app/models/product';
+import { Category } from 'src/app/models/product/category';
+import { Product } from 'src/app/models/product/product';
 import { CategoryService } from 'src/app/services/category.service';
 import { ProductService } from 'src/app/services/product.service';
 import { WishlistService } from 'src/app/services/wishlist.service';
@@ -39,9 +39,8 @@ export class CategoryComponent implements OnInit {
     }
   }
 
-  getProductByCategory(id:number) {
+  getProductByCategory(id: number) {
     return this.productService.getProductByCategoryId(id).subscribe(products => {
-      console.log(products);
       this.products = products;
     })
   }
@@ -72,17 +71,20 @@ export class CategoryComponent implements OnInit {
           timeOut: 3000,
           progressBar: true,
         })
-        console.log(this.response);
       }, error => {
         this.toastrService.error("Product already exists in wishlist", "Go to wishlist", {
           timeOut: 3000,
           progressBar: true
         })
-        console.log(error);
+      })
+    } else {
+      this.toastrService.error("Please login to add", "Error", {
+        timeOut: 3000,
+        progressBar: true
       })
     }
   }
-  
+
   addProductToCart(id: number) {
     if (this.token != null) {
       this.addToCart = new AddToCart();
@@ -94,20 +96,17 @@ export class CategoryComponent implements OnInit {
           timeOut: 3000,
           progressBar: true,
         })
-        console.log(this.response);
       }, error => {
         this.toastrService.error("Product already exists in cart", "Go to cart", {
           timeOut: 3000,
           progressBar: true
         })
-        console.log(error);
       })
     } else {
       this.toastrService.error("Please login to add", "Error", {
         timeOut: 3000,
         progressBar: true
       })
-      console.log("Please login to add");
     }
   }
 }

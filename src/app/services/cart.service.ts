@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AddToCart } from '../models/cart/add-to-cart';
-import { Product } from '../models/product';
+import { Product } from '../models/product/product';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class CartService {
   constructor(private http: HttpClient) { }
 
   getAllProducts(token: string): Observable<Product[]> {
-    return this.http.get<Product[]> (`${this.BASE_URL}/cart/getAll/${token}`);
+    return this.http.get<Product[]>(`${this.BASE_URL}/cart/getAll/${token}`);
   }
 
   removeProduct(token: string, id: number): Observable<Object> {

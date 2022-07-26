@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Addtowishlist } from '../models/wishlist/addtowishlist';
-import { Product } from '../models/product';
 import { WishlistItem } from '../models/wishlist/wishlist-item';
 
 @Injectable({
@@ -15,7 +14,7 @@ export class WishlistService {
   constructor(private http: HttpClient) { }
 
   getAllProducts(token: string): Observable<WishlistItem[]> {
-    return this.http.get<WishlistItem[]> (`${this.BASE_URL}/wishlist/getAll/${token}`);
+    return this.http.get<WishlistItem[]>(`${this.BASE_URL}/wishlist/getAll/${token}`);
   }
 
   removeProduct(token: string, id: number): Observable<Object> {

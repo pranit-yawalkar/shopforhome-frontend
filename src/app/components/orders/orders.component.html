@@ -14,16 +14,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr (click)="selectProduct(order.orderItem.product.id)" class="cartItem text-center" *ngFor="let order of response; let i = index;">
+                    <tr (click)="selectProduct(order.orderItem.product.id)" class="cartItem text-center"
+                        *ngFor="let order of response; let i = index;">
                         <th scope="row">{{i+1}}</th>
                         <td class="img-row"><img src="{{order.orderItem.product.imageUrl}}" alt=""></td>
-                        <td>{{order.orderItem.product.productName}}</td>
+                        <td>{{order.orderItem.product.productName.substr(0, 50)}}</td>
                         <td>{{order.createdDate.substr(0, 10)}}</td>
                         <td>{{order.orderItem.quantity}}</td>
                         <td>{{order.orderItem.product.price * order.orderItem.quantity | currency: 'INR'}}</td>
                     </tr>
                 </tbody>
-            </table>            
+            </table>
             <ng-template #elseTemplate>
                 <div class="text-center py-2">
                     <i class="bi bi-cart"></i>

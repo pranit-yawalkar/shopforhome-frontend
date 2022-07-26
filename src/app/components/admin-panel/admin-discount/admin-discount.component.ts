@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Coupon } from 'src/app/models/coupon';
+import { Coupon } from 'src/app/models/order/coupon';
 import { DiscountService } from 'src/app/services/discount.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -78,13 +78,11 @@ export class AdminDiscountComponent implements OnInit {
               progressBar: true,
             })
             this.reloadComponent("/admin-panel/coupons");
-            console.log(response);
           }, error => {
             this.toastrService.error("Something went wrong!", "Error", {
               timeOut: 3000,
               progressBar: true,
             })
-            console.log(error);
           })
         }
       })
@@ -109,7 +107,6 @@ export class AdminDiscountComponent implements OnInit {
             timeOut: 3000,
             progressBar: true,
           })
-          console.log(error);
         })
       })
     } else {
@@ -127,13 +124,11 @@ export class AdminDiscountComponent implements OnInit {
             progressBar: true,
           })
           this.reloadComponent("/admin-panel/coupons")
-          console.log(response);
         }, error => {
           this.toastrService.error("Something went wrong!", "Error", {
             timeOut: 3000,
             progressBar: true,
           })
-          console.log(error);
         })
       })
     } else {

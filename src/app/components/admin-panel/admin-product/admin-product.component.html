@@ -8,11 +8,12 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Image</th>
+                <th class="img-head" scope="col">Image</th>
                 <th scope="col">Product Name</th>
                 <th scope="col">Category Name</th>
                 <th scope="col">Description</th>
                 <th scope="col">Price</th>
+                <th scope="col">Stocks</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
@@ -24,6 +25,7 @@
                 <td>{{product.categoryName}}</td>
                 <td>{{product.description.substr(0, 20)}}</td>
                 <td>{{product.price | currency: "INR"}}</td>
+                <td>{{product.quantity}}</td>
                 <td><i class="bi bi-pencil-square text-primary mx-2" data-bs-toggle="modal"
                         data-bs-target="#updateModal" (click)="onClickUpdateButton(product.productId)"></i><i
                         class="bi bi-trash-fill text-danger mx-2" (click)="deleteProduct(product.productId)"></i></td>
@@ -55,8 +57,10 @@
                         <!-- <input formControlName="categoryName" type="text" name="categoryName" class="form-control" id="categoryName" placeholder="Enter category name here" > -->
 
                         <select formControlName="categoryName" id="categoryName">
-                            <option value="Select a category" selected="selected" hidden="hidden">Select a category</option>
-                             <option *ngFor="let category of categories" [ngValue]="category.categoryName">{{category.categoryName}}</option>
+                            <option value="Select a category" selected="selected" hidden="hidden">Select a category
+                            </option>
+                            <option *ngFor="let category of categories" [ngValue]="category.categoryName">
+                                {{category.categoryName}}</option>
                         </select>
                         <small
                             *ngIf="productForm.get('categoryName')?.invalid && productForm.get('categoryName')?.touched"
@@ -129,8 +133,10 @@
                         <!-- <input formControlName="categoryName" type="text" name="categoryName" class="form-control" id="categoryName" placeholder="Enter category name here" > -->
 
                         <select formControlName="categoryName" id="categoryName">
-                            <option value="Select a category" selected="selected" hidden="hidden">Select a category</option>
-                             <option *ngFor="let category of categories" [ngValue]="category.categoryName">{{category.categoryName}}</option>
+                            <option value="Select a category" selected="selected" hidden="hidden">Select a category
+                            </option>
+                            <option *ngFor="let category of categories" [ngValue]="category.categoryName">
+                                {{category.categoryName}}</option>
                         </select>
                         <small
                             *ngIf="productForm.get('categoryName')?.invalid && productForm.get('categoryName')?.touched"

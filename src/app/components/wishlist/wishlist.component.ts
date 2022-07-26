@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Addtowishlist } from 'src/app/models/wishlist/addtowishlist';
-import { Product } from 'src/app/models/product';
-import { WishlistItem } from 'src/app/models/wishlist/wishlist-item';
 import { WishlistService } from 'src/app/services/wishlist.service';
 
 @Component({
@@ -45,7 +43,7 @@ export class WishlistComponent implements OnInit {
   }
 
   addProduct(id: number): void {
-    if(this.token!=null) {
+    if (this.token != null) {
       this.addToWishlist.productId = id;
       this.wishlistService.addProduct(this.token, this.addToWishlist).subscribe(response => {
         this.response = response;

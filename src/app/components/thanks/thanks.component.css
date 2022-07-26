@@ -4,6 +4,7 @@
     padding: 5em 0 12em 0;
     border-radius: 0.5em;
 }
+
 .thanks-container {
     padding: 3em;
     background-color: #fff;
@@ -29,5 +30,5 @@
     .thanks-container {
         width: 100%;
     }
-    
+
 }

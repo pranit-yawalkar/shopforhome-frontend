@@ -39,24 +39,15 @@ export class LoginComponent implements OnInit {
   }
 
   doSignIn(): void {
-    console.log(this.loginForm.value);
     this.userService.doSignIn(this.loginForm.value).subscribe(response => {
       this.response = response;
-      console.log(this.response);
       this.loggedIn = true;
       localStorage.setItem('token', this.response.message);
-      // localStorage.setItem('role', this.response.role);
       this.reloadComponent();
       this.toastrService.success("Keep Shopping...", "Logged In Successfully!!", {
         timeOut: 2000,
         progressBar: true,
       })
-
-      // setTimeout(() => {
-      //   this.router.navigate(['/home']).then(() => {
-      //     window.location.reload();
-      //   });
-      // }, 1000);
     }, error => {
       this.loggedIn = false;
       this.flag = true;

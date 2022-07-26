@@ -17,10 +17,9 @@ export class AdminPanelComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = localStorage.getItem('token');
-    if(this.token!=null) {
-      this.userService.getUserByToken(this.token).subscribe(user=> {
+    if (this.token != null) {
+      this.userService.getUserByToken(this.token).subscribe(user => {
         this.user = user;
-        console.log(this.user);
       })
     }
   }

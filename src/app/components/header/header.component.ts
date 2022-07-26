@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Category } from 'src/app/models/category';
+import { Category } from 'src/app/models/product/category';
 import { User } from 'src/app/models/user/user';
 import { CartService } from 'src/app/services/cart.service';
 import { CategoryService } from 'src/app/services/category.service';
@@ -28,16 +28,16 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.getAllCategories();
     this.token = localStorage.getItem('token');
-    if(this.token!=null) {
+    if (this.token != null) {
       this.loggedIn = true;
       // this.role = localStorage.getItem('role');
-      this.userService.getUserByToken(this.token).subscribe(user=> {
+      this.userService.getUserByToken(this.token).subscribe(user => {
         this.role = user.role;
       })
       this.cartLength = this.getCartItemCount(this.token);
     }
 
-    if(this.route.snapshot.paramMap.get('search')!=null) {
+    if (this.route.snapshot.paramMap.get('search') != null) {
       this.searchValue = this.route.snapshot.paramMap.get('search');
     }
   }
@@ -61,17 +61,15 @@ export class HeaderComponent implements OnInit {
   getAllCategories(): void {
     this.categoryService.getAllCategories().subscribe(categories => {
       this.categories = categories;
-      console.log(this.categories);
     },
       error => {
         console.log(error);
-    })
+      })
   }
 
   search(): void {
-    if(this.searchValue!=null) {
-      console.log(this.searchValue);
-      this.reloadOnSearch('', {queryParams: {search: this.searchValue}});
+    if (this.searchValue != null) {
+      this.reloadOnSearch('', { queryParams: { search: this.searchValue } });
     }
   }
 
@@ -83,10 +81,6 @@ export class HeaderComponent implements OnInit {
       progressBar: true
     });
     this.reloadComponent('/login');
-    // this.router.navigate(['/login']);
-    // setTimeout(() => {
-    //     window.location.reload();
-    // }, 2500);
   }
 
   getCartItemCount(token: string): number {

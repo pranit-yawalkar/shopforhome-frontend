@@ -1,4 +1,4 @@
-import { Product } from "../product";
+import { Product } from "../product/product";
 
 export class CartItem {
     quantity!: number;

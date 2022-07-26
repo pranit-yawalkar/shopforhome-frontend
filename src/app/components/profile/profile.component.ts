@@ -24,8 +24,6 @@ export class ProfileComponent implements OnInit {
   getUserByToken(token: string): void {
     this.userService.getUserByToken(token).subscribe(user => {
       this.user = user;
-      console.log(user);
     });
   }
-
 }

@@ -18,7 +18,7 @@ export class AdminHomeComponent implements OnInit {
   chart: any = [];
 
 
-  constructor(private userService: UserService, private orderService: OrderService) { 
+  constructor(private userService: UserService, private orderService: OrderService) {
     Chart.register(...registerables);
   }
 
@@ -28,14 +28,12 @@ export class AdminHomeComponent implements OnInit {
       this.userService.getUserByToken(this.token).subscribe(user => {
         this.orderService.getAllSortedOrdersAsc(user.role).subscribe(response => {
           this.response = response;
-          this.response.forEach((order: any)=>{
-            this.map[order.createdDate.substr(0,10)] = (this.map[order.createdDate.substr(0,10)] || 0) + 1;
+          this.response.forEach((order: any) => {
+            this.map[order.createdDate.substr(0, 10)] = (this.map[order.createdDate.substr(0, 10)] || 0) + 1;
           })
           this.labels = Object.keys(this.map);
           this.values = Object.values(this.map);
 
-          console.log(this.labels, this.values);
-          
           this.chart = new Chart('canvas', {
             type: 'line',
             data: {
@@ -54,10 +52,6 @@ export class AdminHomeComponent implements OnInit {
         })
       })
     }
-  }
-
-  mapOrdersToDate(token: string): void {
-    
   }
 
 }

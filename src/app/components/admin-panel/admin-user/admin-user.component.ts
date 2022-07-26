@@ -149,16 +149,9 @@ export class AdminUserComponent implements OnInit {
           timeOut: 3000,
           progressBar: true,
         })
-        console.log(error);
       })
     })
   }
-
-  // getUserById(token:string, id: number): void {
-  //   this.userService.getUserById(token, id).subscribe(user=> {
-
-  //   })
-  // }
 
   updateUser() {
     this.token = localStorage.getItem('token');
@@ -170,13 +163,12 @@ export class AdminUserComponent implements OnInit {
             progressBar: true,
           })
           this.reloadComponent("/admin-panel/users")
-          
+
         }, error => {
           this.toastrService.error("Something went wrong!", "Error", {
             timeOut: 3000,
             progressBar: true,
           })
-          console.log(error);
         })
       })
     }
@@ -186,20 +178,19 @@ export class AdminUserComponent implements OnInit {
     this.token = localStorage.getItem('token');
     if (this.token != null) {
       this.userService.getUserByToken(this.token).subscribe(response => {
-        this.userService.deleteUser(id, response.role).subscribe(response=>{
+        this.userService.deleteUser(id, response.role).subscribe(response => {
           this.toastrService.success("user deleted successfully!", "Success", {
             timeOut: 3000,
             progressBar: true,
           })
           this.reloadComponent("/admin-panel/users")
-          
+
         }, error => {
           this.toastrService.error("Something went wrong!", "Error", {
             timeOut: 3000,
             progressBar: true,
           })
-          console.log(error);
-        })      
+        })
       })
     } else {
       console.log("Access Denied!");

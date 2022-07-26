@@ -4,34 +4,36 @@
         <div *ngIf="responseList!=null && responseList.length>0; else elseTemplate" class="row">
             <div class="col-md-12">
                 <div class="row">
-                        <div class="col-md-4 col-sm-6" *ngFor="let item of responseList">
-                            <div class="card my-2">
-                                <div class="img-container" (click)="selectProduct(item.product.productId)">
-                                <img [src]="item.productDTO.imageUrl" alt="{{item.productDTO.productName}}" class="card-img-top my-2">
+                    <div class="col-md-4 col-sm-6" *ngFor="let item of responseList">
+                        <div class="card my-2">
+                            <div class="img-container" (click)="selectProduct(item.product.productId)">
+                                <img [src]="item.productDTO.imageUrl" alt="{{item.productDTO.productName}}"
+                                    class="card-img-top my-2">
+                            </div>
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <p>{{item.productDTO.productName | titlecase }}</p>
                                 </div>
-                                <div class="card-header">
-                                    <div class="card-title">
-                                        <p>{{item.productDTO.productName | titlecase }}</p>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <h6>{{ item.productDTO.description.substr(0, 25) }}</h6>
-                                    <p class="lead">{{ item.productDTO.price | currency: "INR" }}</p>
-                                </div>
-                                <div class="m-auto mb-4 btn-container">
-                                    <button class="mx-2 btn btn-outline-primary btn-block"
-                                        [class.disabled]="item.productDTO.quantity < 1"
-                                        [class.btn-outline-danger]="item.productDTO.quantity < 1">
-                                        <i
-                                            [ngClass]="(item.productDTO.quantity < 1) ? 'bi bi-cart-x-fill': 'bi bi-cart-fill'"></i>&nbsp;
-                                        {{ item.productDTO.quantity < 1 ? "Out of stock" : "Add to Cart" }}
-                                    </button>
-                                    <button class="mx-2 btn btn-outline-danger btn-block" (click)="removeProduct(item.id)">Remove &nbsp;<i class="bi bi-trash-fill"></i></button>
-                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h6>{{ item.productDTO.description.substr(0, 25) }}</h6>
+                                <p class="lead">{{ item.productDTO.price | currency: "INR" }}</p>
+                            </div>
+                            <div class="m-auto mb-4 btn-container">
+                                <button class="mx-2 btn btn-outline-primary btn-block"
+                                    [class.disabled]="item.productDTO.quantity < 1"
+                                    [class.btn-outline-danger]="item.productDTO.quantity < 1">
+                                    <i
+                                        [ngClass]="(item.productDTO.quantity < 1) ? 'bi bi-cart-x-fill': 'bi bi-cart-fill'"></i>&nbsp;
+                                    {{ item.productDTO.quantity < 1 ? "Out of stock" : "Add to Cart" }} </button>
+                                        <button class="mx-2 btn btn-outline-danger btn-block"
+                                            (click)="removeProduct(item.id)">Remove &nbsp;<i
+                                                class="bi bi-trash-fill"></i></button>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
         </div>
         <ng-template #elseTemplate>
             <div class="text-center py-2">

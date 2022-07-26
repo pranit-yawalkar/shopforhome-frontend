@@ -3,9 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { single } from 'rxjs';
-import { Category } from 'src/app/models/category';
-import { Product } from 'src/app/models/product';
-import { Productandcat } from 'src/app/models/productandcat';
+import { Category } from 'src/app/models/product/category';
+import { Product } from 'src/app/models/product/product';
+import { Productandcat } from 'src/app/models/product/productandcat';
 import { CategoryService } from 'src/app/services/category.service';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -24,7 +24,7 @@ export class AdminProductComponent implements OnInit {
   categories!: Category[];
 
 
-  constructor(private productService: ProductService, 
+  constructor(private productService: ProductService,
     private categoryService: CategoryService, private formBuilder: FormBuilder,
     private toastrService: ToastrService, private router: Router) { }
 
@@ -71,18 +71,18 @@ export class AdminProductComponent implements OnInit {
   }
 
   getAllProducts(): void {
-    this.productService.getAllProducts().subscribe(products=>{
-      products.forEach(prod=> {
-        
-        this.categoryService.getCategoryById(prod.categoryId).subscribe(category=>{
+    this.productService.getAllProducts().subscribe(products => {
+      products.forEach(prod => {
+
+        this.categoryService.getCategoryById(prod.categoryId).subscribe(category => {
           this.productCat = new Productandcat();
           this.productCat.productId = prod.productId,
-        this.productCat.productName = prod.productName,
-        this.productCat.imageUrl = prod.imageUrl,
-        this.productCat.description = prod.description,
-        this.productCat.price = prod.price,
-        this.productCat.quantity = prod.quantity,
-          this.productCat.categoryName = category.categoryName;
+            this.productCat.productName = prod.productName,
+            this.productCat.imageUrl = prod.imageUrl,
+            this.productCat.description = prod.description,
+            this.productCat.price = prod.price,
+            this.productCat.quantity = prod.quantity,
+            this.productCat.categoryName = category.categoryName;
           this.productCats.push(this.productCat);
         })
       })
@@ -90,7 +90,7 @@ export class AdminProductComponent implements OnInit {
   }
 
   getAllCategories(): void {
-    this.categoryService.getAllCategories().subscribe(categories=>{
+    this.categoryService.getAllCategories().subscribe(categories => {
       this.categories = categories;
     })
   }
@@ -105,14 +105,13 @@ export class AdminProductComponent implements OnInit {
       this.product.description = this.productCat.description;
       this.product.quantity = this.productCat.quantity;
       this.product.categoryId = category.id;
-      this.productService.createProduct(this.product).subscribe(response=>{
+      this.productService.createProduct(this.product).subscribe(response => {
         this.toastrService.success("Category added successfully!", "Success", {
           timeOut: 3000,
           progressBar: true,
         })
         this.reloadComponent("/admin-panel/products");
-        console.log(response);
-      },error => {
+      }, error => {
         this.toastrService.error("Something went wrong!", "Error", {
           timeOut: 3000,
           progressBar: true,
@@ -125,45 +124,39 @@ export class AdminProductComponent implements OnInit {
   updateProduct(): void {
     this.productCat = this.productForm.value;
     this.categoryService.getCategoryByName(this.productCat.categoryName).subscribe(category => {
-      // this.product = new Product();
-      // this.product.productId = this.productCat.productId;
       this.product.productName = this.productCat.productName;
       this.product.imageUrl = this.productCat.imageUrl;
       this.product.price = this.productCat.price;
       this.product.description = this.productCat.description;
       this.product.quantity = this.productCat.quantity;
       this.product.categoryId = category.id;
-    this.productService.updateProduct(this.product, this.product.productId).subscribe(response=> {
-      this.toastrService.success("Category updated successfully!", "Success", {
-        timeOut: 3000,
-        progressBar: true,
+      this.productService.updateProduct(this.product, this.product.productId).subscribe(response => {
+        this.toastrService.success("Category updated successfully!", "Success", {
+          timeOut: 3000,
+          progressBar: true,
+        })
+        this.reloadComponent("/admin-panel/products")
+      }, error => {
+        this.toastrService.error("Something went wrong!", "Error", {
+          timeOut: 3000,
+          progressBar: true,
+        })
       })
-      this.reloadComponent("/admin-panel/products")
-      console.log(response);
-    },error => {
-      this.toastrService.error("Something went wrong!", "Error", {
-        timeOut: 3000,
-        progressBar: true,
-      })
-      console.log(error);
     })
-  })
-}
+  }
 
   deleteProduct(id: number): void {
-    this.productService.deleteProduct(id).subscribe(response=>{
+    this.productService.deleteProduct(id).subscribe(response => {
       this.toastrService.success("Product deleted successfully!", "Success", {
         timeOut: 3000,
         progressBar: true,
       })
       this.reloadComponent("/admin-panel/products")
-      console.log(response);
     }, error => {
       this.toastrService.error("Something went wrong!", "Error", {
         timeOut: 3000,
         progressBar: true,
       })
-      console.log(error);
     })
   }
 }

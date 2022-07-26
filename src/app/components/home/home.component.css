@@ -16,7 +16,8 @@
     padding-left: 5em;
 }
 
-select, option {
+select,
+option {
     width: 80px;
     margin-right: 50px;
 }
@@ -100,8 +101,8 @@ select, option {
     }
 
     .filter-container h2 {
-       padding: 0;
-       margin: 0;
+        padding: 0;
+        margin: 0;
     }
 
     .filter-container {
@@ -113,9 +114,10 @@ select, option {
     .filter-container h2 {
         padding: 0;
         margin: 0;
-     }
-     .filter-container {
+    }
+
+    .filter-container {
         justify-content: space-between;
         font-size: 0.8rem;
-     }
+    }
 }

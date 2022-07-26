@@ -50,10 +50,13 @@
                         </div>
                     </div>
                     <div class="cost-detail">
-                        <h5 class="text-right mt-4">Total Cost: <span class="text-danger">{{response.totalCost | currency:
+                        <h5 class="text-right mt-4">Total Cost: <span class="text-danger">{{response.totalCost |
+                                currency:
                                 'INR'}}</span></h5>
-                        <h5 class="text-right mt-4">Discount: <span class="text-danger">{{(this.discount==null ? 0 : this.discount) | currency: 'INR'}}</span></h5>
-                        <h5 class="text-right mt-4">Amount to be paid: <span class="text-danger">{{((response.totalCost - this.discountAmount) > 0 ? (response.totalCost - this.discountAmount) : 0) |
+                        <h5 class="text-right mt-4">Discount: <span class="text-danger">{{(this.discount==null ? 0 :
+                                this.discount) | currency: 'INR'}}</span></h5>
+                        <h5 class="text-right mt-4">Amount to be paid: <span class="text-danger">{{((response.totalCost
+                                - this.discountAmount) > 0 ? (response.totalCost - this.discountAmount) : 0) |
                                 currency: 'INR' }}</span></h5>
                     </div>
                 </div>

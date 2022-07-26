@@ -3,11 +3,13 @@
     background-color: #fff;
     border-radius: 0.5em;
 }
+
 .btn-color {
     background-color: var(--secondary);
 }
 
-.qty-up, .qty-down {
+.qty-up,
+.qty-down {
     border-radius: 0;
 }
 
@@ -122,6 +124,7 @@
     margin-left: 30px;
     color: #D10024;
 }
+
 /* 
 .product-details .product-options {
     margin-top: 30px;
@@ -219,4 +222,3 @@
 .product-details .product-links li+li {
     margin-left: 10px;
 } */
-

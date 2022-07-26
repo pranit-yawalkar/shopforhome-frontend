@@ -11,10 +11,10 @@
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
                 <th scope="col">Contact</th>
-                <th scope="col">Address</th>
-                <th scope="col">City</th>
-                <th scope="col">State</th>
-                <th scope="col">Zip</th>
+                <th class="hidden-col" scope="col">Address</th>
+                <th class="hidden-col" scope="col">City</th>
+                <th class="hidden-col" scope="col">State</th>
+                <th class="hidden-col" scope="col">Zip</th>
                 <th scope="col">Role</th>
                 <th scope="col">Actions</th>
             </tr>
@@ -26,10 +26,10 @@
                 <td>{{user.firstName + " " + user.lastName}}</td>
                 <td>{{user.email}}</td>
                 <td>{{user.contactNumber}}</td>
-                <td>{{user.address.substring(0,10)}}</td>
-                <td>{{user.city}}</td>
-                <td>{{user.state}}</td>
-                <td>{{user.zipCode}}</td>
+                <td class="hidden-col" >{{user.address.substring(0,10)}}</td>
+                <td class="hidden-col" >{{user.city}}</td>
+                <td class="hidden-col" >{{user.state}}</td>
+                <td class="hidden-col" >{{user.zipCode}}</td>
                 <td>{{user.role}}</td>
                 <td><i class="bi bi-pencil-square text-primary mx-2" data-bs-toggle="modal"
                         data-bs-target="#updateModal" (click)="onClickUpdateButton(user.id)"></i><i
@@ -78,14 +78,18 @@
                         <div class="col-md-6">
                             <label for="newPassword" class="form-label">Password</label>
                             <input type="password" class="form-control" formControlName="password" id="newPassword"
-                            placeholder="Enter password here" (change)="onPasswordChange()">
-                            <span *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched" class="text-danger input-danger">Password must have 8 characters with uppercase, lowercase, number and special characters</span>
+                                placeholder="Enter password here" (change)="onPasswordChange()">
+                            <span *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched"
+                                class="text-danger input-danger">Password must have 8 characters with uppercase,
+                                lowercase, number and special characters</span>
                         </div>
                         <div class="col-md-6">
                             <label for="newConfirmPassword" class="form-label">Confirm Password</label>
-                            <input type="password" class="form-control" formControlName="confirmPassword" id="newConfirmPassword"
-                            placeholder="Confirm your password" (change)="onPasswordChange()">
-                            <span *ngIf="confirmPassword.hasError('mismatch')" class="text-danger input-danger">Password do not match</span>
+                            <input type="password" class="form-control" formControlName="confirmPassword"
+                                id="newConfirmPassword" placeholder="Confirm your password"
+                                (change)="onPasswordChange()">
+                            <span *ngIf="confirmPassword.hasError('mismatch')" class="text-danger input-danger">Password
+                                do not match</span>
                         </div>
                         <div class="col-12 mb-2">
                             <label for="address" class="form-label">Address</label>
@@ -94,8 +98,7 @@
                         </div>
                         <div class="col-md-6 mb-2">
                             <label for="city" class="form-label">City</label>
-                            <input type="text" class="form-control" formControlName="city" id="city"
-                                placeholder="city">
+                            <input type="text" class="form-control" formControlName="city" id="city" placeholder="city">
                         </div>
                         <div class="col-md-6 mb-2">
                             <label for="state" class="form-label">State</label>

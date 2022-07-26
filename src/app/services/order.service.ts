@@ -17,15 +17,19 @@ export class OrderService {
   }
 
   getAllOrders(token: string): Observable<Object> {
-    return this.http.get<Object> (`${this.BASE_URL}/order/getAll?token=${token}`);
+    return this.http.get<Object>(`${this.BASE_URL}/order/getAll?token=${token}`);
   }
 
   getAllSortedOrders(role: string): Observable<Object> {
-    return this.http.get<Object> (`${this.BASE_URL}/order/getAllSorted?role=${role}`);
+    return this.http.get<Object>(`${this.BASE_URL}/order/getAllSorted?role=${role}`);
+  }
+
+  getAllSortedUsersOrders(): Observable<Object> {
+    return this.http.get<Object>(`${this.BASE_URL}/order/getAllSortedOrders`);
   }
 
   getAllSortedOrdersAsc(role: string): Observable<Object> {
-    return this.http.get<Object> (`${this.BASE_URL}/order/getAllSortedAsc?role=${role}`);
+    return this.http.get<Object>(`${this.BASE_URL}/order/getAllSortedAsc?role=${role}`);
   }
 
   deleteOrder(orderId: number, role: string): Observable<Object> {

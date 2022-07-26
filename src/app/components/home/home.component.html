@@ -2,13 +2,13 @@
     <div *ngIf="this.searchValue===null && this.filterValue===null; else elseTemplate" class="section pt-3">
         <div class="filter-container">
             <h2 class="text-center pb-3">Our Products</h2>
-                <select (change)="onChange($event)" class="my-2" id="categoryName">
-                    <option selected="selected" hidden="hidden">Filters</option>
-                     <option value="lowToHigh" [value]="'lowToHigh'">Price Low to High</option>
-                     <option value="lowToHigh" [value]="'highToLow'">Price High to Low</option>
-                </select>
+            <select (change)="onChange($event)" class="my-2" id="categoryName">
+                <option selected="selected" hidden="hidden">Filters</option>
+                <option value="lowToHigh" [value]="'lowToHigh'">Price Low to High</option>
+                <option value="lowToHigh" [value]="'highToLow'">Price High to Low</option>
+            </select>
         </div>
-        
+
         <div class="container" *ngFor="let categoryItem of catArr">
             <h3 *ngIf="categoryItem.products.length>0">{{categoryItem.category.categoryName}}</h3>
             <div class="row">
@@ -17,8 +17,8 @@
                         <div class="col-md-4 col-sm-6" *ngFor="let product of categoryItem.products">
                             <div class="card my-2">
                                 <div class="img-container" (click)="selectProduct(product.productId)">
-                                    <img [src]="product.imageUrl"
-                                        alt="{{product.productName}}" class="card-img-top my-2 mx-auto">
+                                    <img [src]="product.imageUrl" alt="{{product.productName}}"
+                                        class="card-img-top my-2 mx-auto">
                                 </div>
                                 <div (click)="selectProduct(product.productId)" class="card-header">
                                     <div class="card-title">
@@ -30,16 +30,16 @@
                                     <p class="lead">{{ product.price | currency: "INR" }}</p>
                                 </div>
                                 <div class="m-auto mb-4 btn-container">
-                                    <button (click)="addProductToCart(product.productId)" class="mx-2 btn btn-outline-primary btn-block"
+                                    <button (click)="addProductToCart(product.productId)"
+                                        class="mx-2 btn btn-outline-primary btn-block"
                                         [class.disabled]="product.quantity < 1"
                                         [class.btn-outline-danger]="product.quantity < 1">
                                         <i
                                             [ngClass]="(product.quantity < 1) ? 'bi bi-cart-x-fill': 'bi bi-cart-fill'"></i>&nbsp;
-                                        {{ product.quantity < 1 ? "Out of stock" : "Add to Cart" }} 
-                                    </button>
-                                    <button class="mx-2 btn btn-outline-danger btn-block"
-                                        (click)="addProductToWishlist(product.productId)">Add to wishlist &nbsp;<i
-                                            class="bi bi-bag-heart-fill"></i></button>
+                                        {{ product.quantity < 1 ? "Out of stock" : "Add to Cart" }} </button>
+                                            <button class="mx-2 btn btn-outline-danger btn-block"
+                                                (click)="addProductToWishlist(product.productId)">Add to wishlist
+                                                &nbsp;<i class="bi bi-bag-heart-fill"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -59,8 +59,8 @@
                     <div class="col-md-4 col-sm-6" *ngFor="let product of this.products">
                         <div class="card my-2">
                             <div class="img-container" (click)="selectProduct(product.productId)">
-                                <img [src]="product.imageUrl"
-                                    alt="{{product.productName}}" class="card-img-top my-2 mx-auto">
+                                <img [src]="product.imageUrl" alt="{{product.productName}}"
+                                    class="card-img-top my-2 mx-auto">
                             </div>
                             <div (click)="selectProduct(product.productId)" class="card-header">
                                 <div class="card-title">
@@ -72,16 +72,16 @@
                                 <p class="lead">{{ product.price | currency: "INR" }}</p>
                             </div>
                             <div class="m-auto mb-4 btn-container">
-                                <button (click)="addProductToCart(product.productId)" class="mx-2 btn btn-outline-primary btn-block"
+                                <button (click)="addProductToCart(product.productId)"
+                                    class="mx-2 btn btn-outline-primary btn-block"
                                     [class.disabled]="product.quantity < 1"
                                     [class.btn-outline-danger]="product.quantity < 1">
                                     <i
                                         [ngClass]="(product.quantity < 1) ? 'bi bi-cart-x-fill': 'bi bi-cart-fill'"></i>&nbsp;
-                                    {{ product.quantity < 1 ? "Out of stock" : "Add to Cart" }} 
-                                </button>
-                                <button class="mx-2 btn btn-outline-danger btn-block"
-                                    (click)="addProductToWishlist(product.productId)">Add to wishlist &nbsp;<i
-                                        class="bi bi-bag-heart-fill"></i></button>
+                                    {{ product.quantity < 1 ? "Out of stock" : "Add to Cart" }} </button>
+                                        <button class="mx-2 btn btn-outline-danger btn-block"
+                                            (click)="addProductToWishlist(product.productId)">Add to wishlist &nbsp;<i
+                                                class="bi bi-bag-heart-fill"></i></button>
                             </div>
                         </div>
                     </div>
@@ -104,8 +104,8 @@
                     <div class="col-md-4 col-sm-6" *ngFor="let product of this.products">
                         <div class="card my-2">
                             <div class="img-container" (click)="selectProduct(product.productId)">
-                                <img [src]="product.imageUrl"
-                                    alt="{{product.productName}}" class="card-img-top my-2 mx-auto">
+                                <img [src]="product.imageUrl" alt="{{product.productName}}"
+                                    class="card-img-top my-2 mx-auto">
                             </div>
                             <div (click)="selectProduct(product.productId)" class="card-header">
                                 <div class="card-title">
@@ -117,16 +117,16 @@
                                 <p class="lead">{{ product.price | currency: "INR" }}</p>
                             </div>
                             <div class="m-auto mb-4 btn-container">
-                                <button (click)="addProductToCart(product.productId)" class="mx-2 btn btn-outline-primary btn-block"
+                                <button (click)="addProductToCart(product.productId)"
+                                    class="mx-2 btn btn-outline-primary btn-block"
                                     [class.disabled]="product.quantity < 1"
                                     [class.btn-outline-danger]="product.quantity < 1">
                                     <i
                                         [ngClass]="(product.quantity < 1) ? 'bi bi-cart-x-fill': 'bi bi-cart-fill'"></i>&nbsp;
-                                    {{ product.quantity < 1 ? "Out of stock" : "Add to Cart" }} 
-                                </button>
-                                <button class="mx-2 btn btn-outline-danger btn-block"
-                                    (click)="addProductToWishlist(product.productId)">Add to wishlist &nbsp;<i
-                                        class="bi bi-bag-heart-fill"></i></button>
+                                    {{ product.quantity < 1 ? "Out of stock" : "Add to Cart" }} </button>
+                                        <button class="mx-2 btn btn-outline-danger btn-block"
+                                            (click)="addProductToWishlist(product.productId)">Add to wishlist &nbsp;<i
+                                                class="bi bi-bag-heart-fill"></i></button>
                             </div>
                         </div>
                     </div>
@@ -140,7 +140,7 @@
             <!-- /product -->
         </div>
     </ng-template>
-    
-    
+
+
     <!-- /row -->
 </div>

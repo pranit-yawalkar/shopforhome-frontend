@@ -11,11 +11,21 @@ i {
     cursor: pointer;
 }
 
-.productItem{
+.productItem {
     transition: 0.2s ease-in-out;
     cursor: pointer;
 }
 
 .productItem:hover {
     background-color: rgb(196, 196, 196);
+}
+
+@media screen and (max-width: 1080px) {
+    .img-row {
+        display: none;
+    }
+
+    .img-head {
+        display: none;
+    }
 }

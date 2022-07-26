@@ -10,7 +10,8 @@
 }
 
 
-.qty-up, .qty-down {
+.qty-up,
+.qty-down {
     border-radius: 0;
 }
 
@@ -38,7 +39,7 @@ tr {
     text-align: center;
 }
 
-.cartItem{
+.cartItem {
     transition: 0.2s ease-in-out;
     cursor: pointer;
 }
@@ -76,8 +77,9 @@ tr {
 
 @media screen and (max-width: 768px) {
     .img-row {
-      display: none;
+        display: none;
     }
+
     .img-head {
         display: none;
     }

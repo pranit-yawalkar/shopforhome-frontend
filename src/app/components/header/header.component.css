@@ -1,7 +1,8 @@
 .navbar-brand {
     font-size: 1.5rem;
 }
-.nav-bg{
+
+.nav-bg {
     background-color: var(--primary);
 }
 
@@ -43,7 +44,7 @@
 }
 
 .form-input {
-    width:60%;
+    width: 60%;
 }
 
 
@@ -57,7 +58,8 @@
         margin: 0.3em 0;
     }
 
-    .form-input, .form-container {
+    .form-input,
+    .form-container {
         width: 100%;
     }
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Product } from 'src/app/models/product';
+import { Product } from 'src/app/models/product/product';
 import { OrderService } from 'src/app/services/order.service';
 
 @Component({
@@ -16,21 +16,24 @@ export class OrdersComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = localStorage.getItem('token');
-    if(this.token != null) {
-      this.getAllOrders(this.token);
+    if (this.token != null) {
+      this.getAllSortedOrders(this.token);
     }
   }
-  
+
   selectProduct(id: number): void {
-    console.log(id);
     this.router.navigate(['/product', id]);
   }
 
+  getAllSortedOrders(token: string): void {
+    this.orderService.getAllSortedUsersOrders().subscribe(response => {
+      this.response = response;
+    })
+  }
+
   getAllOrders(token: string): void {
-    this.orderService.getAllOrders(token).subscribe(orders=> {
+    this.orderService.getAllOrders(token).subscribe(orders => {
       this.response = orders;
-      // Date date = new Date(this.response[0].createdDate);
-      console.log(this.response[0].createdDate)
     })
   }
 

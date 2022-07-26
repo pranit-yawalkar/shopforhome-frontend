@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Category } from 'src/app/models/category';
+import { Category } from 'src/app/models/product/category';
 import { CategoryService } from 'src/app/services/category.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -19,10 +19,9 @@ export class FooterComponent implements OnInit {
   ngOnInit(): void {
     this.getAllCategories();
     this.token = localStorage.getItem('token');
-    if(this.token!=null) {
+    if (this.token != null) {
       this.loggedIn = true;
-      // this.role = localStorage.getItem('role');
-      this.userService.getUserByToken(this.token).subscribe(user=> {
+      this.userService.getUserByToken(this.token).subscribe(user => {
         this.role = user.role;
       })
     }
@@ -34,7 +33,6 @@ export class FooterComponent implements OnInit {
     },
       error => {
         console.log(error);
-    })
+      })
   }
-
 }

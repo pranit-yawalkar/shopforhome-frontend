@@ -49,14 +49,14 @@ export class RegisterComponent implements OnInit {
   get password(): AbstractControl {
     return this.registerForm.controls['password'];
   }
-  
+
   get confirmPassword(): AbstractControl {
     return this.registerForm.controls['confirmPassword'];
   }
 
   doSignUp(): void {
-    if(this.registerForm.valid) {
-      this.userService.doSignUp(this.registerForm.value).subscribe(response=> {
+    if (this.registerForm.valid) {
+      this.userService.doSignUp(this.registerForm.value).subscribe(response => {
         this.response = response;
         this.registered = true;
         this.errorOccured = false;
@@ -70,7 +70,7 @@ export class RegisterComponent implements OnInit {
         // setTimeout(() => {
         //   this.registered = false;
         // }, 3000);
-      }, error=> {
+      }, error => {
         this.registered = false;
         this.registerForm.reset();
         this.errorOccured = true;
@@ -82,9 +82,9 @@ export class RegisterComponent implements OnInit {
         //   this.errorOccured = false;
         // }, 5000);
       })
-      
+
     }
 
-    
+
   }
 }

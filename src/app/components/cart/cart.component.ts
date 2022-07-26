@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AddToCart } from 'src/app/models/cart/add-to-cart';
 import { Cart } from 'src/app/models/cart/cart';
-import { Coupon } from 'src/app/models/coupon';
-import { Product } from 'src/app/models/product';
+import { Coupon } from 'src/app/models/order/coupon';
+import { Product } from 'src/app/models/product/product';
 import { CartService } from 'src/app/services/cart.service';
 import { DiscountService } from 'src/app/services/discount.service';
 import { OrderService } from 'src/app/services/order.service';
@@ -29,18 +29,18 @@ export class CartComponent implements OnInit {
 
   @ViewChild('quantity') quantityInput: any;
 
-  constructor(private cartService: CartService, private toastrService: ToastrService, private router: Router, private orderService: OrderService, 
+  constructor(private cartService: CartService, private toastrService: ToastrService, private router: Router, private orderService: OrderService,
     private discountService: DiscountService, private userService: UserService) { }
 
   ngOnInit(): void {
     this.token = localStorage.getItem('token');
-    if(localStorage.getItem('discount')!=null) {
+    if (localStorage.getItem('discount') != null) {
       this.discount = localStorage.getItem('discount')
-      if(this.discount!=null) {
+      if (this.discount != null) {
         this.discountAmount = parseInt(this.discount);
       }
     }
-    if(this.token != null) {
+    if (this.token != null) {
       this.getAllProducts(this.token);
       this.getAllCoupons(this.token);
     }
@@ -53,9 +53,9 @@ export class CartComponent implements OnInit {
   }
 
   increase(cartItemId: number, productId: number, index: number) {
-    if(this.response.cartItems[index].productDTO.quantity >= 1) {
+    if (this.response.cartItems[index].productDTO.quantity >= 1) {
       this.response.cartItems[index].quantity++;
-      if(this.response.cartItems[index].quantity > this.response.cartItems[index].productDTO.quantity) {
+      if (this.response.cartItems[index].quantity > this.response.cartItems[index].productDTO.quantity) {
         this.response.cartItems[index].quantity = this.response.cartItems[index].productDTO.quantity;
 
         this.updateCart(cartItemId, productId, this.response.cartItems[index].quantity);
@@ -71,13 +71,12 @@ export class CartComponent implements OnInit {
   }
 
   decrease(cartItemId: number, productId: number, index: number) {
-    if(this.response.cartItems[index].productDTO.quantity > 0) {
+    if (this.response.cartItems[index].productDTO.quantity > 0) {
       this.response.cartItems[index].quantity--;
-      
-      if(this.response.cartItems[index].quantity <= 1) {
+      if (this.response.cartItems[index].quantity <= 1) {
         this.response.cartItems[index].quantity = 1;
         this.updateCart(cartItemId, productId, this.response.cartItems[index].quantity);
-        this.reloadComponent('/cart'); 
+        this.reloadComponent('/cart');
       } else {
         this.updateCart(cartItemId, productId, this.response.cartItems[index].quantity);
         this.reloadComponent('/cart');
@@ -99,51 +98,46 @@ export class CartComponent implements OnInit {
   }
 
   removeProduct(id: number): void {
-    if(this.token!=null) {
-      this.cartService.removeProduct(this.token, id).subscribe(response=>{
+    if (this.token != null) {
+      this.cartService.removeProduct(this.token, id).subscribe(response => {
         this.toastrService.success("Product removed successfully!", "Success", {
           timeOut: 3000,
           progressBar: true
         })
         this.reloadComponent('/cart');
-        console.log(this.response);
       }, error => {
         this.toastrService.error("Something went wrong!", "Error", {
           timeOut: 3000,
           progressBar: true
         })
-        console.log(error);
       })
     } else {
       this.toastrService.error("Something went wrong!", "Error", {
         timeOut: 3000,
         progressBar: true
       })
-      console.log("Something went wrong...");
     }
   }
 
   updateCart(cartItemId: number, productId: number, quantity: number) {
-    if(this.token!=null) {
+    if (this.token != null) {
       this.addToCart = new AddToCart();
       this.addToCart.productId = productId;
       this.addToCart.quantity = quantity;
-      this.cartService.updateCart(this.token, cartItemId, this.addToCart).subscribe(response=> {
-        console.log(response);
-      }, error=> {
+      this.cartService.updateCart(this.token, cartItemId, this.addToCart).subscribe(response => {
+        this.response = response;
+      }, error => {
         console.log(error);
       });
     }
   }
 
   orderNow(cart: Cart): void {
-    if(this.token!=null) {
-      this.orderService.placeOrder(this.token, cart).subscribe(response=> {
-        console.log(response);
+    if (this.token != null) {
+      this.orderService.placeOrder(this.token, cart).subscribe(response => {
         localStorage.removeItem('discount');
         this.reloadComponent('/thanks');
-      }, error=> {
-        console.log(error);
+      }, error => {
         this.toastrService.error("Something went wrong!", "Error", {
           timeOut: 3000,
           progressBar: true
@@ -158,8 +152,8 @@ export class CartComponent implements OnInit {
   }
 
   getAllCoupons(token: string): void {
-    this.userService.getUserByToken(token).subscribe(user=>{
-      this.discountService.getAllCoupons(user.role).subscribe(coupons=>{
+    this.userService.getUserByToken(token).subscribe(user => {
+      this.discountService.getAllCoupons(user.role).subscribe(coupons => {
         this.coupons = coupons;
       });
     })
@@ -167,32 +161,29 @@ export class CartComponent implements OnInit {
 
   onSubmit() {
     this.token = localStorage.getItem('token');
-    if(this.token!=null) {
-       this.applyCoupon(this.token, this.code);
+    if (this.token != null) {
+      this.applyCoupon(this.token, this.code);
     } else {
       console.log("Access Denied!");
     }
   }
 
   applyCoupon(token: string, code: string): void {
-      this.discountService.getCouponByCode(code).subscribe(coupon=>{
-        console.log(coupon);
-        this.discountService.applyCoupon(token, coupon).subscribe(res=>{
-         this.cart = res;
-         localStorage.setItem('discount', this.cart.discount.toString());
-          this.toastrService.success("Coupon applied successfully!", "Success", {
-            timeOut: 3000,
-            progressBar: true
-          })
-          this.reloadComponent('/cart');
-        })
-      }, error=>{
-        this.toastrService.error("Something went wrong!", "Error", {
+    this.discountService.getCouponByCode(code).subscribe(coupon => {
+      this.discountService.applyCoupon(token, coupon).subscribe(res => {
+        this.cart = res;
+        localStorage.setItem('discount', this.cart.discount.toString());
+        this.toastrService.success("Coupon applied successfully!", "Success", {
           timeOut: 3000,
           progressBar: true
         })
-        console.log(error);
+        this.reloadComponent('/cart');
       })
-    } 
-
+    }, error => {
+      this.toastrService.error("Something went wrong!", "Error", {
+        timeOut: 3000,
+        progressBar: true
+      })
+    })
+  }
 }

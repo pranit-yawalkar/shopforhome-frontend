@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AddToCart } from 'src/app/models/cart/add-to-cart';
-import { Product } from 'src/app/models/product';
+import { Product } from 'src/app/models/product/product';
 import { Addtowishlist } from 'src/app/models/wishlist/addtowishlist';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -31,12 +31,11 @@ export class ProductComponent implements OnInit {
     this.token = localStorage.getItem('token');
     if (this.token != null) {
       this.loggedIn = true;
-      console.log(this.loggedIn);
     }
   }
 
   getProductById(id: number) {
-    this.productService.getProductById(id).subscribe(product => { 
+    this.productService.getProductById(id).subscribe(product => {
       this.product = product;
     })
   }
@@ -57,20 +56,17 @@ export class ProductComponent implements OnInit {
           timeOut: 3000,
           progressBar: true,
         })
-        console.log(this.response);
       }, error => {
         this.toastrService.error("Product already exists in wishlist", "Go to wishlist", {
           timeOut: 3000,
           progressBar: true
         })
-        console.log(error);
       })
     } else {
       this.toastrService.error("Please login to add", "Error", {
         timeOut: 3000,
         progressBar: true
       })
-      console.log("Please login to add");
     }
   }
 
@@ -86,20 +82,17 @@ export class ProductComponent implements OnInit {
           timeOut: 3000,
           progressBar: true,
         })
-        console.log(this.response);
       }, error => {
         this.toastrService.error("Product already exists in cart", "Go to cart", {
           timeOut: 3000,
           progressBar: true
         })
-        console.log(error);
       })
     } else {
       this.toastrService.error("Please login to add", "Error", {
         timeOut: 3000,
         progressBar: true
       })
-      console.log("Please login to add");
     }
   }
 }

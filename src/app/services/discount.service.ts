@@ -3,22 +3,22 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Cart } from '../models/cart/cart';
-import { Coupon } from '../models/coupon';
+import { Coupon } from '../models/order/coupon';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DiscountService {
   private BASE_URL = environment.BASE_URL;
-  
+
   constructor(private http: HttpClient) { }
 
   getAllCoupons(role: string): Observable<Coupon[]> {
-    return this.http.get<Coupon[]> (`${this.BASE_URL}/coupon/getAll?role=${role}`);
+    return this.http.get<Coupon[]>(`${this.BASE_URL}/coupon/getAll?role=${role}`);
   }
 
   getCouponById(id: number, role: string): Observable<Coupon> {
-    return this.http.get<Coupon> (`${this.BASE_URL}/coupon/get/${id}?role=${role}`);
+    return this.http.get<Coupon>(`${this.BASE_URL}/coupon/get/${id}?role=${role}`);
   }
 
   updateCoupon(id: number, role: string, coupon: Coupon): Observable<Object> {

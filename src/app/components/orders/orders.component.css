@@ -9,7 +9,7 @@
     width: 30px;
 }
 
-.cartItem{
+.cartItem {
     transition: 0.2s ease-in-out;
     cursor: pointer;
 }
@@ -20,8 +20,9 @@
 
 @media screen and (max-width: 768px) {
     .img-row {
-      display: none;
+        display: none;
     }
+
     .img-head {
         display: none;
     }
